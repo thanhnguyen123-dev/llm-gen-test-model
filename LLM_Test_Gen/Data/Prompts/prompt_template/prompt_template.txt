@@ -622,9 +622,9 @@ class FindMaxTest {
 ```
 
 After carefully reading the requirements, as well as the examples, please generate the JUnit 5 test suite for the following focal method:
-- FQB: {target_fqn}
-- Signature: {target_signature}
-- Jimple Code: {target_jimple}
+- FQB: %%target_fqn%%
+- Signature: %%target_signature%%
+- Jimple Code: %%target_jimple_code%%
 
 
 
