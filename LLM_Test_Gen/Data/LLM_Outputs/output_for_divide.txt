@@ -1,0 +1,112 @@
+```java
+package org.example;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the Divider class.
+ * Covers typical cases, edge cases, and error handling.
+ */
+class DividerTest {
+
+    private Divider divider;
+
+    @BeforeEach
+    void setUp() {
+        divider = new Divider();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName("Test division of positive numbers")
+    void testDividePositiveNumbers() {
+        assertEquals(2, divider.divide(10, 5), "Dividing 10 by 5 should result in 2");
+        assertEquals(1, divider.divide(5, 5), "Dividing 5 by 5 should result in 1");
+    }
+
+    @Test
+    @DisplayName("Test division of negative numbers")
+    void testDivideNegativeNumbers() {
+        assertEquals(2, divider.divide(-10, -5), "Dividing -10 by -5 should result in 2");
+        assertEquals(1, divider.divide(-5, -5), "Dividing -5 by -5 should result in 1");
+    }
+
+    @Test
+    @DisplayName("Test division with positive dividend and negative divisor")
+    void testDividePositiveDividendNegativeDivisor() {
+        assertEquals(-2, divider.divide(10, -5), "Dividing 10 by -5 should result in -2");
+    }
+
+    @Test
+    @DisplayName("Test division with negative dividend and positive divisor")
+    void testDivideNegativeDividendPositiveDivisor() {
+        assertEquals(-2, divider.divide(-10, 5), "Dividing -10 by 5 should result in -2");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName("Test dividing by one")
+    void testDivideByOne() {
+        assertEquals(10, divider.divide(10, 1), "Dividing 10 by 1 should result in 10");
+    }
+
+    @Test
+    @DisplayName("Test dividing by minus one")
+    void testDivideByMinusOne() {
+        assertEquals(-10, divider.divide(10, -1), "Dividing 10 by -1 should result in -10");
+    }
+
+    @Test
+    @DisplayName("Test dividing zero by a number")
+    void testDivideZeroByNumber() {
+        assertEquals(0, divider.divide(0, 5), "Dividing 0 by any number should result in 0");
+    }
+
+    @Test
+    @DisplayName("Test division resulting in truncation")
+    void testDivisionWithTruncation() {
+        assertEquals(1, divider.divide(5, 3), "Dividing 5 by 3 should truncate and result in 1");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName("Test division by zero")
+    void testDivideByZero() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            divider.divide(10, 0);
+        }, "Should throw IllegalArgumentException for division by zero");
+
+        assertEquals("Division by zero is not allowed", exception.getMessage(), "Exception message should match expected");
+    }
+
+    // EXTREME VALUES
+
+    @Test
+    @DisplayName("Test dividing Integer.MIN_VALUE by -1")
+    void testDivideMinValueByMinusOne() {
+        assertEquals(Integer.MIN_VALUE / -1, divider.divide(Integer.MIN_VALUE, -1),
+                "Dividing Integer.MIN_VALUE by -1 should result in Integer overflow");
+    }
+
+    @Test
+    @DisplayName("Test dividing Integer.MIN_VALUE by 1")
+    void testDivideMinValueByOne() {
+        assertEquals(Integer.MIN_VALUE, divider.divide(Integer.MIN_VALUE, 1),
+                "Dividing Integer.MIN_VALUE by 1 should be Integer.MIN_VALUE");
+    }
+
+    @Test
+    @DisplayName("Test dividing Integer.MAX_VALUE by 1")
+    void testDivideMaxValueByOne() {
+        assertEquals(Integer.MAX_VALUE, divider.divide(Integer.MAX_VALUE, 1),
+                "Dividing Integer.MAX_VALUE by 1 should be Integer.MAX_VALUE");
+    }
+}
+```

@@ -1,0 +1,76 @@
+ ```java
+package org.example;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CheckPassing class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CheckPassingTest {
+
+    private CheckPassing checkPassing;
+
+    @BeforeEach
+    void setUp() {
+        checkPassing = new CheckPassing();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName("Test checkPassing with a passing score")
+    void testCheckPassingWithPassingScore() {
+        assertTrue(checkPassing.checkPassing(50), "Score of 50 should be passing");
+        assertTrue(checkPassing.checkPassing(75), "Score of 75 should be passing");
+        assertTrue(checkPassing.checkPassing(100), "Score of 100 should be passing");
+    }
+
+    @Test
+    @DisplayName("Test checkPassing with a failing score")
+    void testCheckPassingWithFailingScore() {
+        assertFalse(checkPassing.checkPassing(0), "Score of 0 should be failing");
+        assertFalse(checkPassing.checkPassing(49), "Score of 49 should be failing");
+    }
+
+    // EDGE CASES (boundary values)
+
+    @Test
+    @DisplayName("Test checkPassing with boundary passing score")
+    void testCheckPassingWithBoundaryPassingScore() {
+        assertTrue(checkPassing.checkPassing(50), "Score of 50 should be passing (boundary)");
+    }
+
+    @Test
+    @DisplayName("Test checkPassing with boundary failing score")
+    void testCheckPassingWithBoundaryFailingScore() {
+        assertFalse(checkPassing.checkPassing(49), "Score of 49 should be failing (just below boundary)");
+    }
+
+    // CORNER CASES (invalid scores)
+
+    @Test
+    @DisplayName("Test checkPassing with a negative score")
+    void testCheckPassingWithNegativeScore() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            checkPassing.checkPassing(-1);
+        }, "Should throw IllegalArgumentException for negative score");
+
+        assertEquals("Score must be between 0 and 100", exception.getMessage(), "Exception message should match expected");
+    }
+
+    @Test
+    @DisplayName("Test checkPassing with a score above 100")
+    void testCheckPassingWithScoreAboveHundred() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            checkPassing.checkPassing(101);
+        }, "Should throw IllegalArgumentException for score above 100");
+
+        assertEquals("Score must be between 0 and 100", exception.getMessage(), "Exception message should match expected");
+    }
+}
+```
