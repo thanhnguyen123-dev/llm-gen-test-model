@@ -1,0 +1,1194 @@
+"FQN","Signature","Jimple Code Representation"
+"org.apache.commons.lang3.text.WordUtils.uncapitalize(java.lang.String)","java.lang.String uncapitalize(java.lang.String)","{
+    java.lang.String str;
+    unknown $stack1;
+
+
+    str := @parameter0: java.lang.String;
+    $stack1 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String uncapitalize(java.lang.String,char[])>(str, null);
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.wrap(java.lang.String, int, java.lang.String, boolean)","java.lang.String wrap(java.lang.String, int, java.lang.String, boolean)","{
+    boolean wrapLongWords;
+    int wrapLength;
+    java.lang.String newLineStr, str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack8, $stack9, inputLineLength, offset, spaceToWrapAt, wrappedLine;
+
+
+    str := @parameter0: java.lang.String;
+    wrapLength := @parameter1: int;
+    newLineStr := @parameter2: java.lang.String;
+    wrapLongWords := @parameter3: boolean;
+
+    if str != null goto label01;
+
+    return null;
+
+  label01:
+    if newLineStr != null goto label02;
+    newLineStr = <org.apache.commons.lang3.SystemUtils: java.lang.String LINE_SEPARATOR>;
+
+  label02:
+    $stack38 = wrapLength;
+    $stack37 = 1;
+
+    if $stack38 >= $stack37 goto label03;
+    wrapLength = 1;
+
+  label03:
+    $stack32 = str;
+    $stack33 = virtualinvoke str.<java.lang.String: int length()>();
+    $stack34 = 0;
+    offset = $stack34;
+    $stack8 = new java.lang.StringBuilder;
+    $stack36 = inputLineLength;
+    $stack35 = 32;
+    $stack9 = $stack36 + $stack35;
+    specialinvoke $stack8.<java.lang.StringBuilder: void <init>(int)>($stack9);
+    wrappedLine = $stack8;
+
+  label04:
+    $stack20 = inputLineLength;
+    $stack19 = offset;
+    $stack10 = $stack20 - $stack19;
+    $stack21 = wrapLength;
+
+    if $stack10 <= $stack21 goto label10;
+    $stack14 = virtualinvoke str.<java.lang.String: char charAt(int)>(offset);
+
+    if $stack14 != 32 goto label05;
+    offset = offset + 1;
+
+    goto label04;
+
+  label05:
+    $stack15 = wrapLength + offset;
+    spaceToWrapAt = virtualinvoke str.<java.lang.String: int lastIndexOf(int,int)>(32, $stack15);
+
+    if spaceToWrapAt < offset goto label06;
+    $stack29 = virtualinvoke str.<java.lang.String: java.lang.String substring(int,int)>(offset, spaceToWrapAt);
+    $stack30 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack29);
+    $stack31 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(newLineStr);
+    offset = spaceToWrapAt + 1;
+
+    goto label09;
+
+  label06:
+    if wrapLongWords == 0 goto label07;
+    $stack25 = wrapLength + offset;
+    $stack26 = virtualinvoke str.<java.lang.String: java.lang.String substring(int,int)>(offset, $stack25);
+    $stack27 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack26);
+    $stack28 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(newLineStr);
+    offset = offset + wrapLength;
+
+    goto label09;
+
+  label07:
+    $stack16 = wrapLength + offset;
+    spaceToWrapAt = virtualinvoke str.<java.lang.String: int indexOf(int,int)>(32, $stack16);
+
+    if spaceToWrapAt < 0 goto label08;
+    $stack22 = virtualinvoke str.<java.lang.String: java.lang.String substring(int,int)>(offset, spaceToWrapAt);
+    $stack23 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack22);
+    $stack24 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(newLineStr);
+    offset = spaceToWrapAt + 1;
+
+    goto label09;
+
+  label08:
+    $stack17 = virtualinvoke str.<java.lang.String: java.lang.String substring(int)>(offset);
+    $stack18 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack17);
+    offset = inputLineLength;
+
+  label09:
+    goto label04;
+
+  label10:
+    $stack11 = virtualinvoke str.<java.lang.String: java.lang.String substring(int)>(offset);
+    $stack12 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack11);
+    $stack13 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.String toString()>();
+
+    return $stack13;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.swapCase(java.lang.String)","java.lang.String swapCase(java.lang.String)","{
+    java.lang.String str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack5, $stack6, $stack7, $stack8, $stack9, buffer, ch, i, whitespace;
+
+
+    str := @parameter0: java.lang.String;
+    $stack5 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack5 == 0 goto label1;
+
+    return str;
+
+  label1:
+    buffer = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    whitespace = 1;
+    i = 0;
+
+  label2:
+    $stack12 = i;
+    $stack11 = buffer;
+    $stack6 = lengthof $stack11;
+
+    if $stack12 >= $stack6 goto label8;
+    ch = buffer[i];
+    $stack8 = staticinvoke <java.lang.Character: boolean isUpperCase(char)>(ch);
+
+    if $stack8 == 0 goto label3;
+    $stack16 = staticinvoke <java.lang.Character: char toLowerCase(char)>(ch);
+    buffer[i] = $stack16;
+    whitespace = 0;
+
+    goto label7;
+
+  label3:
+    $stack9 = staticinvoke <java.lang.Character: boolean isTitleCase(char)>(ch);
+
+    if $stack9 == 0 goto label4;
+    $stack15 = staticinvoke <java.lang.Character: char toLowerCase(char)>(ch);
+    buffer[i] = $stack15;
+    whitespace = 0;
+
+    goto label7;
+
+  label4:
+    $stack10 = staticinvoke <java.lang.Character: boolean isLowerCase(char)>(ch);
+
+    if $stack10 == 0 goto label6;
+
+    if whitespace == 0 goto label5;
+    $stack14 = staticinvoke <java.lang.Character: char toTitleCase(char)>(ch);
+    buffer[i] = $stack14;
+    whitespace = 0;
+
+    goto label7;
+
+  label5:
+    $stack13 = staticinvoke <java.lang.Character: char toUpperCase(char)>(ch);
+    buffer[i] = $stack13;
+
+    goto label7;
+
+  label6:
+    whitespace = staticinvoke <java.lang.Character: boolean isWhitespace(char)>(ch);
+
+  label7:
+    i = i + 1;
+
+    goto label2;
+
+  label8:
+    $stack7 = new java.lang.String;
+    specialinvoke $stack7.<java.lang.String: void <init>(char[])>(buffer);
+
+    return $stack7;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.capitalize(java.lang.String)","java.lang.String capitalize(java.lang.String)","{
+    java.lang.String str;
+    unknown $stack1;
+
+
+    str := @parameter0: java.lang.String;
+    $stack1 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String capitalize(java.lang.String,char[])>(str, null);
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.capitalize(java.lang.String, char[])","java.lang.String capitalize(java.lang.String, char[])","{
+    char[] delimiters;
+    java.lang.String str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack7, $stack8, $stack9, buffer, capitalizeNext, ch, delimLen, i;
+
+
+    str := @parameter0: java.lang.String;
+    delimiters := @parameter1: char[];
+
+    if delimiters != null goto label1;
+    $stack15 = -1;
+
+    goto label2;
+
+  label1:
+    $stack15 = lengthof delimiters;
+
+  label2:
+    $stack16 = str;
+    $stack7 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>($stack16);
+
+    if $stack7 != 0 goto label3;
+
+    if delimLen != 0 goto label4;
+
+  label3:
+    $stack14 = str;
+
+    return $stack14;
+
+  label4:
+    buffer = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    capitalizeNext = 1;
+    i = 0;
+
+  label5:
+    $stack12 = i;
+    $stack11 = buffer;
+    $stack8 = lengthof $stack11;
+
+    if $stack12 >= $stack8 goto label8;
+    ch = buffer[i];
+    $stack10 = staticinvoke <org.apache.commons.lang3.text.WordUtils: boolean isDelimiter(char,char[])>(ch, delimiters);
+
+    if $stack10 == 0 goto label6;
+    capitalizeNext = 1;
+
+    goto label7;
+
+  label6:
+    if capitalizeNext == 0 goto label7;
+    $stack13 = staticinvoke <java.lang.Character: char toTitleCase(char)>(ch);
+    buffer[i] = $stack13;
+    capitalizeNext = 0;
+
+  label7:
+    i = i + 1;
+
+    goto label5;
+
+  label8:
+    $stack9 = new java.lang.String;
+    specialinvoke $stack9.<java.lang.String: void <init>(char[])>(buffer);
+
+    return $stack9;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.capitalizeFully(java.lang.String, char[])","java.lang.String capitalizeFully(java.lang.String, char[])","{
+    char[] delimiters;
+    java.lang.String str;
+    unknown $stack3, $stack4, $stack5, $stack6, $stack7, delimLen;
+
+
+    str := @parameter0: java.lang.String;
+    delimiters := @parameter1: char[];
+
+    if delimiters != null goto label1;
+    $stack6 = -1;
+
+    goto label2;
+
+  label1:
+    $stack6 = lengthof delimiters;
+
+  label2:
+    $stack7 = str;
+    $stack3 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>($stack7);
+
+    if $stack3 != 0 goto label3;
+
+    if delimLen != 0 goto label4;
+
+  label3:
+    $stack5 = str;
+
+    return $stack5;
+
+  label4:
+    str = virtualinvoke str.<java.lang.String: java.lang.String toLowerCase()>();
+    $stack4 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String capitalize(java.lang.String,char[])>(str, delimiters);
+
+    return $stack4;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.uncapitalize(java.lang.String, char[])","java.lang.String uncapitalize(java.lang.String, char[])","{
+    char[] delimiters;
+    java.lang.String str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack7, $stack8, $stack9, buffer, ch, delimLen, i, uncapitalizeNext;
+
+
+    str := @parameter0: java.lang.String;
+    delimiters := @parameter1: char[];
+
+    if delimiters != null goto label1;
+    $stack15 = -1;
+
+    goto label2;
+
+  label1:
+    $stack15 = lengthof delimiters;
+
+  label2:
+    $stack16 = str;
+    $stack7 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>($stack16);
+
+    if $stack7 != 0 goto label3;
+
+    if delimLen != 0 goto label4;
+
+  label3:
+    $stack14 = str;
+
+    return $stack14;
+
+  label4:
+    buffer = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    uncapitalizeNext = 1;
+    i = 0;
+
+  label5:
+    $stack12 = i;
+    $stack11 = buffer;
+    $stack8 = lengthof $stack11;
+
+    if $stack12 >= $stack8 goto label8;
+    ch = buffer[i];
+    $stack10 = staticinvoke <org.apache.commons.lang3.text.WordUtils: boolean isDelimiter(char,char[])>(ch, delimiters);
+
+    if $stack10 == 0 goto label6;
+    uncapitalizeNext = 1;
+
+    goto label7;
+
+  label6:
+    if uncapitalizeNext == 0 goto label7;
+    $stack13 = staticinvoke <java.lang.Character: char toLowerCase(char)>(ch);
+    buffer[i] = $stack13;
+    uncapitalizeNext = 0;
+
+  label7:
+    i = i + 1;
+
+    goto label5;
+
+  label8:
+    $stack9 = new java.lang.String;
+    specialinvoke $stack9.<java.lang.String: void <init>(char[])>(buffer);
+
+    return $stack9;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.initials(java.lang.String, char[])","java.lang.String initials(java.lang.String, char[])","{
+    char[] delimiters;
+    java.lang.String str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack8, $stack9, buf, ch, count, i, lastWasGap, strLen;
+
+
+    str := @parameter0: java.lang.String;
+    delimiters := @parameter1: char[];
+    $stack8 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack8 == 0 goto label1;
+
+    return str;
+
+  label1:
+    if delimiters == null goto label2;
+    $stack16 = lengthof delimiters;
+
+    if $stack16 != 0 goto label2;
+
+    return """";
+
+  label2:
+    $stack17 = str;
+    $stack18 = virtualinvoke str.<java.lang.String: int length()>();
+    $stack20 = strLen;
+    $stack19 = 2;
+    $stack9 = $stack20 / $stack19;
+    $stack21 = 1;
+    $stack10 = $stack9 + $stack21;
+    $stack22 = newarray (char)[$stack10];
+    $stack23 = 0;
+    count = $stack23;
+    $stack24 = 1;
+    lastWasGap = $stack24;
+    $stack25 = 0;
+    i = $stack25;
+
+  label3:
+    $stack14 = i;
+    $stack13 = strLen;
+
+    if $stack14 >= $stack13 goto label6;
+    ch = virtualinvoke str.<java.lang.String: char charAt(int)>(i);
+    $stack12 = staticinvoke <org.apache.commons.lang3.text.WordUtils: boolean isDelimiter(char,char[])>(ch, delimiters);
+
+    if $stack12 == 0 goto label4;
+    lastWasGap = 1;
+
+    goto label5;
+
+  label4:
+    if lastWasGap == 0 goto label5;
+    $stack15 = count;
+    count = count + 1;
+    buf[$stack15] = ch;
+    lastWasGap = 0;
+
+  label5:
+    i = i + 1;
+
+    goto label3;
+
+  label6:
+    $stack11 = new java.lang.String;
+    specialinvoke $stack11.<java.lang.String: void <init>(char[],int,int)>(buf, 0, count);
+
+    return $stack11;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.initials(java.lang.String)","java.lang.String initials(java.lang.String)","{
+    java.lang.String str;
+    unknown $stack1;
+
+
+    str := @parameter0: java.lang.String;
+    $stack1 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String initials(java.lang.String,char[])>(str, null);
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.isDelimiter(char, char[])","boolean isDelimiter(char, char[])","{
+    char ch;
+    char[] delimiters;
+    unknown $stack6, $stack7, $stack8, delimiter, l2, l3, l4;
+
+
+    ch := @parameter0: char;
+    delimiters := @parameter1: char[];
+
+    if delimiters != null goto label1;
+    $stack8 = staticinvoke <java.lang.Character: boolean isWhitespace(char)>(ch);
+
+    return $stack8;
+
+  label1:
+    l2 = delimiters;
+    l3 = lengthof l2;
+    l4 = 0;
+
+  label2:
+    $stack7 = l4;
+    $stack6 = l3;
+
+    if $stack7 >= $stack6 goto label4;
+    delimiter = l2[l4];
+
+    if ch != delimiter goto label3;
+
+    return 1;
+
+  label3:
+    l4 = l4 + 1;
+
+    goto label2;
+
+  label4:
+    return 0;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.wrap(java.lang.String, int)","java.lang.String wrap(java.lang.String, int)","{
+    int wrapLength;
+    java.lang.String str;
+    unknown $stack2;
+
+
+    str := @parameter0: java.lang.String;
+    wrapLength := @parameter1: int;
+    $stack2 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String wrap(java.lang.String,int,java.lang.String,boolean)>(str, wrapLength, null, 0);
+
+    return $stack2;
+}
+"
+"org.apache.commons.lang3.text.WordUtils.capitalizeFully(java.lang.String)","java.lang.String capitalizeFully(java.lang.String)","{
+    java.lang.String str;
+    unknown $stack1;
+
+
+    str := @parameter0: java.lang.String;
+    $stack1 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String capitalizeFully(java.lang.String,char[])>(str, null);
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharSetUtils.containsAny(java.lang.String, java.lang.String[])","boolean containsAny(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack10, $stack11, $stack12, $stack7, $stack8, $stack9, c, chars, l3, l4, l5;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    $stack7 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack7 != 0 goto label1;
+    $stack8 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack8 == 0 goto label2;
+
+  label1:
+    $stack12 = 0;
+
+    return $stack12;
+
+  label2:
+    chars = staticinvoke <org.apache.commons.lang3.CharSet: org.apache.commons.lang3.CharSet getInstance(java.lang.String[])>(set);
+    l3 = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    l4 = lengthof l3;
+    l5 = 0;
+
+  label3:
+    $stack11 = l5;
+    $stack10 = l4;
+
+    if $stack11 >= $stack10 goto label5;
+    c = l3[l5];
+    $stack9 = virtualinvoke chars.<org.apache.commons.lang3.CharSet: boolean contains(char)>(c);
+
+    if $stack9 == 0 goto label4;
+
+    return 1;
+
+  label4:
+    l5 = l5 + 1;
+
+    goto label3;
+
+  label5:
+    return 0;
+}
+"
+"org.apache.commons.lang3.CharSetUtils.modify(java.lang.String, java.lang.String[], boolean)","java.lang.String modify(java.lang.String, java.lang.String[], boolean)","{
+    boolean expect;
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack8, $stack9, buffer, chars, chrs, i, sz;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    expect := @parameter2: boolean;
+    chars = staticinvoke <org.apache.commons.lang3.CharSet: org.apache.commons.lang3.CharSet getInstance(java.lang.String[])>(set);
+    $stack8 = new java.lang.StringBuilder;
+    $stack9 = virtualinvoke str.<java.lang.String: int length()>();
+    specialinvoke $stack8.<java.lang.StringBuilder: void <init>(int)>($stack9);
+    buffer = $stack8;
+    chrs = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    sz = lengthof chrs;
+    i = 0;
+
+  label1:
+    $stack14 = i;
+    $stack13 = sz;
+
+    if $stack14 >= $stack13 goto label3;
+    $stack11 = chrs[i];
+    $stack12 = virtualinvoke chars.<org.apache.commons.lang3.CharSet: boolean contains(char)>($stack11);
+
+    if $stack12 != expect goto label2;
+    $stack15 = chrs[i];
+    $stack16 = virtualinvoke buffer.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack15);
+
+  label2:
+    i = i + 1;
+
+    goto label1;
+
+  label3:
+    $stack10 = virtualinvoke buffer.<java.lang.StringBuilder: java.lang.String toString()>();
+
+    return $stack10;
+}
+"
+"org.apache.commons.lang3.CharSetUtils.deepEmpty(java.lang.String[])","boolean deepEmpty(java.lang.String[])","{
+    java.lang.String[] strings;
+    unknown $stack5, $stack6, $stack7, $stack8, l1, l2, l3, s;
+
+
+    strings := @parameter0: java.lang.String[];
+
+    if strings == null goto label3;
+    l1 = strings;
+    l2 = lengthof l1;
+    l3 = 0;
+
+  label1:
+    $stack8 = l3;
+    $stack7 = l2;
+
+    if $stack8 >= $stack7 goto label3;
+    s = l1[l3];
+    $stack6 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isNotEmpty(java.lang.CharSequence)>(s);
+
+    if $stack6 == 0 goto label2;
+
+    return 0;
+
+  label2:
+    l3 = l3 + 1;
+
+    goto label1;
+
+  label3:
+    $stack5 = 1;
+
+    return $stack5;
+}
+"
+"org.apache.commons.lang3.CharSetUtils.count(java.lang.String, java.lang.String[])","int count(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack8, $stack9, c, chars, count, l4, l5, l6;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    $stack8 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack8 != 0 goto label1;
+    $stack9 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack9 == 0 goto label2;
+
+  label1:
+    $stack13 = 0;
+
+    return $stack13;
+
+  label2:
+    chars = staticinvoke <org.apache.commons.lang3.CharSet: org.apache.commons.lang3.CharSet getInstance(java.lang.String[])>(set);
+    count = 0;
+    l4 = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    l5 = lengthof l4;
+    l6 = 0;
+
+  label3:
+    $stack12 = l6;
+    $stack11 = l5;
+
+    if $stack12 >= $stack11 goto label5;
+    c = l4[l6];
+    $stack10 = virtualinvoke chars.<org.apache.commons.lang3.CharSet: boolean contains(char)>(c);
+
+    if $stack10 == 0 goto label4;
+    count = count + 1;
+
+  label4:
+    l6 = l6 + 1;
+
+    goto label3;
+
+  label5:
+    return count;
+}
+"
+"org.apache.commons.lang3.CharSetUtils.keep(java.lang.String, java.lang.String[])","java.lang.String keep(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack2, $stack3, $stack4, $stack5;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+
+    if str != null goto label1;
+
+    return null;
+
+  label1:
+    $stack2 = virtualinvoke str.<java.lang.String: boolean isEmpty()>();
+
+    if $stack2 != 0 goto label2;
+    $stack3 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack3 == 0 goto label3;
+
+  label2:
+    $stack5 = """";
+
+    return $stack5;
+
+  label3:
+    $stack4 = staticinvoke <org.apache.commons.lang3.CharSetUtils: java.lang.String modify(java.lang.String,java.lang.String[],boolean)>(str, set, 1);
+
+    return $stack4;
+}
+"
+"org.apache.commons.lang3.CharSetUtils.squeeze(java.lang.String, java.lang.String[])","java.lang.String squeeze(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack9, buffer, ch, chars, chrs, i, lastChar, sz;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    $stack9 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack9 != 0 goto label1;
+    $stack10 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack10 == 0 goto label2;
+
+  label1:
+    $stack21 = str;
+
+    return $stack21;
+
+  label2:
+    chars = staticinvoke <org.apache.commons.lang3.CharSet: org.apache.commons.lang3.CharSet getInstance(java.lang.String[])>(set);
+    $stack11 = new java.lang.StringBuilder;
+    $stack12 = virtualinvoke str.<java.lang.String: int length()>();
+    specialinvoke $stack11.<java.lang.StringBuilder: void <init>(int)>($stack12);
+    buffer = $stack11;
+    chrs = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    sz = lengthof chrs;
+    lastChar = 32;
+    ch = 32;
+    i = 0;
+
+  label3:
+    $stack16 = i;
+    $stack15 = sz;
+
+    if $stack16 >= $stack15 goto label6;
+    ch = chrs[i];
+
+    if ch != lastChar goto label4;
+
+    if i == 0 goto label4;
+    $stack20 = virtualinvoke chars.<org.apache.commons.lang3.CharSet: boolean contains(char)>(ch);
+
+    if $stack20 == 0 goto label4;
+
+    goto label5;
+
+  label4:
+    $stack18 = buffer;
+    $stack17 = ch;
+    $stack14 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack17);
+    $stack19 = ch;
+    lastChar = $stack19;
+
+  label5:
+    i = i + 1;
+
+    goto label3;
+
+  label6:
+    $stack13 = virtualinvoke buffer.<java.lang.StringBuilder: java.lang.String toString()>();
+
+    return $stack13;
+}
+"
+"org.apache.commons.lang3.CharSetUtils.delete(java.lang.String, java.lang.String[])","java.lang.String delete(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack2, $stack3, $stack4, $stack5;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    $stack2 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack2 != 0 goto label1;
+    $stack3 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack3 == 0 goto label2;
+
+  label1:
+    $stack5 = str;
+
+    return $stack5;
+
+  label2:
+    $stack4 = staticinvoke <org.apache.commons.lang3.CharSetUtils: java.lang.String modify(java.lang.String,java.lang.String[],boolean)>(str, set, 0);
+
+    return $stack4;
+}
+"
+"org.apache.commons.lang3.CharRange.hashCode()","int hashCode()","{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1, $stack2, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack4 = 83 + $stack1;
+    $stack2 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack3 = 7 * $stack2;
+    $stack6 = $stack4 + $stack3;
+    $stack5 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack5 == 0 goto label1;
+    $stack8 = 1;
+
+    goto label2;
+
+  label1:
+    $stack8 = 0;
+
+  label2:
+    $stack7 = $stack6 + $stack8;
+
+    return $stack7;
+}
+"
+"org.apache.commons.lang3.CharRange.access$200(org.apache.commons.lang3.CharRange)","char access$200(org.apache.commons.lang3.CharRange)","{
+    org.apache.commons.lang3.CharRange x0;
+    unknown $stack1;
+
+
+    x0 := @parameter0: org.apache.commons.lang3.CharRange;
+    $stack1 = x0.<org.apache.commons.lang3.CharRange: char start>;
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharRange.equals(java.lang.Object)","boolean equals(java.lang.Object)","{
+    java.lang.Object obj;
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack10, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, other;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    obj := @parameter0: java.lang.Object;
+
+    if obj != this goto label1;
+
+    return 1;
+
+  label1:
+    $stack3 = obj instanceof org.apache.commons.lang3.CharRange;
+
+    if $stack3 != 0 goto label2;
+
+    return 0;
+
+  label2:
+    other = (org.apache.commons.lang3.CharRange) obj;
+    $stack5 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack4 = other.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack5 != $stack4 goto label3;
+    $stack7 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack6 = other.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack7 != $stack6 goto label3;
+    $stack10 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+    $stack9 = other.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack10 != $stack9 goto label3;
+    $stack8 = 1;
+
+    goto label4;
+
+  label3:
+    $stack8 = 0;
+
+  label4:
+    return $stack8;
+}
+"
+"org.apache.commons.lang3.CharRange.isNot(char)","org.apache.commons.lang3.CharRange isNot(char)","{
+    char ch;
+    unknown $stack1;
+
+
+    ch := @parameter0: char;
+    $stack1 = new org.apache.commons.lang3.CharRange;
+    specialinvoke $stack1.<org.apache.commons.lang3.CharRange: void <init>(char,char,boolean)>(ch, ch, 1);
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharRange.access$300(org.apache.commons.lang3.CharRange)","char access$300(org.apache.commons.lang3.CharRange)","{
+    org.apache.commons.lang3.CharRange x0;
+    unknown $stack1;
+
+
+    x0 := @parameter0: org.apache.commons.lang3.CharRange;
+    $stack1 = x0.<org.apache.commons.lang3.CharRange: char end>;
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharRange.toString()","java.lang.String toString()","{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack2, $stack20, $stack21, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, buf;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack2 = this.<org.apache.commons.lang3.CharRange: java.lang.String iToString>;
+
+    if $stack2 != null goto label3;
+    $stack4 = new java.lang.StringBuilder;
+    specialinvoke $stack4.<java.lang.StringBuilder: void <init>(int)>(4);
+    buf = $stack4;
+    $stack5 = virtualinvoke this.<org.apache.commons.lang3.CharRange: boolean isNegated()>();
+
+    if $stack5 == 0 goto label1;
+    $stack17 = virtualinvoke buf.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(94);
+
+  label1:
+    $stack19 = buf;
+    $stack18 = this;
+    $stack6 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack7 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack6);
+    $stack20 = this;
+    $stack9 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack21 = this;
+    $stack8 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack9 == $stack8 goto label2;
+    $stack12 = virtualinvoke buf.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(45);
+    $stack13 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack14 = virtualinvoke buf.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack13);
+
+  label2:
+    $stack16 = this;
+    $stack15 = buf;
+    $stack10 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+    this.<org.apache.commons.lang3.CharRange: java.lang.String iToString> = $stack10;
+
+  label3:
+    $stack11 = this;
+    $stack3 = this.<org.apache.commons.lang3.CharRange: java.lang.String iToString>;
+
+    return $stack3;
+}
+"
+"org.apache.commons.lang3.CharRange.iterator()","java.util.Iterator iterator()","{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = new org.apache.commons.lang3.CharRange$CharacterIterator;
+    specialinvoke $stack1.<org.apache.commons.lang3.CharRange$CharacterIterator: void <init>(org.apache.commons.lang3.CharRange,org.apache.commons.lang3.CharRange$1)>(this, null);
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharRange.getEnd()","char getEnd()","{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharRange.access$100(org.apache.commons.lang3.CharRange)","boolean access$100(org.apache.commons.lang3.CharRange)","{
+    org.apache.commons.lang3.CharRange x0;
+    unknown $stack1;
+
+
+    x0 := @parameter0: org.apache.commons.lang3.CharRange;
+    $stack1 = x0.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharRange.isNotIn(char, char)","org.apache.commons.lang3.CharRange isNotIn(char, char)","{
+    char end, start;
+    unknown $stack2;
+
+
+    start := @parameter0: char;
+    end := @parameter1: char;
+    $stack2 = new org.apache.commons.lang3.CharRange;
+    specialinvoke $stack2.<org.apache.commons.lang3.CharRange: void <init>(char,char,boolean)>(start, end, 1);
+
+    return $stack2;
+}
+"
+"org.apache.commons.lang3.CharRange.getStart()","char getStart()","{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = this.<org.apache.commons.lang3.CharRange: char start>;
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharRange.isNegated()","boolean isNegated()","{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    return $stack1;
+}
+"
+"org.apache.commons.lang3.CharRange.contains(org.apache.commons.lang3.CharRange)","boolean contains(org.apache.commons.lang3.CharRange)","{
+    org.apache.commons.lang3.CharRange range, this;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack2, $stack20, $stack21, $stack22, $stack23, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    range := @parameter0: org.apache.commons.lang3.CharRange;
+
+    if range != null goto label01;
+    $stack23 = new java.lang.IllegalArgumentException;
+    specialinvoke $stack23.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>(""The Range must not be null"");
+
+    throw $stack23;
+
+  label01:
+    $stack2 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack2 == 0 goto label08;
+    $stack12 = range.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack12 == 0 goto label04;
+    $stack19 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack18 = range.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack19 < $stack18 goto label02;
+    $stack21 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack20 = range.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack21 > $stack20 goto label02;
+    $stack22 = 1;
+
+    goto label03;
+
+  label02:
+    $stack22 = 0;
+
+  label03:
+    return $stack22;
+
+  label04:
+    $stack14 = range.<org.apache.commons.lang3.CharRange: char end>;
+    $stack13 = this.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack14 < $stack13 goto label05;
+    $stack16 = range.<org.apache.commons.lang3.CharRange: char start>;
+    $stack15 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack16 <= $stack15 goto label06;
+
+  label05:
+    $stack17 = 1;
+
+    goto label07;
+
+  label06:
+    $stack17 = 0;
+
+  label07:
+    return $stack17;
+
+  label08:
+    $stack3 = range.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack3 == 0 goto label11;
+    $stack9 = this.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack9 != 0 goto label09;
+    $stack10 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack10 != 65535 goto label09;
+    $stack11 = 1;
+
+    goto label10;
+
+  label09:
+    $stack11 = 0;
+
+  label10:
+    return $stack11;
+
+  label11:
+    $stack5 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack4 = range.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack5 > $stack4 goto label12;
+    $stack7 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack6 = range.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack7 < $stack6 goto label12;
+    $stack8 = 1;
+
+    goto label13;
+
+  label12:
+    $stack8 = 0;
+
+  label13:
+    return $stack8;
+}
+"
+"org.apache.commons.lang3.CharRange.isIn(char, char)","org.apache.commons.lang3.CharRange isIn(char, char)","{
+    char end, start;
+    unknown $stack2;
+
+
+    start := @parameter0: char;
+    end := @parameter1: char;
+    $stack2 = new org.apache.commons.lang3.CharRange;
+    specialinvoke $stack2.<org.apache.commons.lang3.CharRange: void <init>(char,char,boolean)>(start, end, 0);
+
+    return $stack2;
+}
+"
+"org.apache.commons.lang3.CharRange.contains(char)","boolean contains(char)","{
+    char ch;
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack2, $stack3, $stack4, $stack5, $stack6, $stack7;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    ch := @parameter0: char;
+    $stack2 = this.<org.apache.commons.lang3.CharRange: char start>;
+
+    if ch < $stack2 goto label1;
+    $stack5 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    if ch > $stack5 goto label1;
+    $stack7 = 1;
+
+    goto label2;
+
+  label1:
+    $stack7 = 0;
+
+  label2:
+    $stack6 = this;
+    $stack3 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack7 == $stack3 goto label3;
+    $stack4 = 1;
+
+    goto label4;
+
+  label3:
+    $stack4 = 0;
+
+  label4:
+    return $stack4;
+}
+"
+"org.apache.commons.lang3.CharRange.is(char)","org.apache.commons.lang3.CharRange is(char)","{
+    char ch;
+    unknown $stack1;
+
+
+    ch := @parameter0: char;
+    $stack1 = new org.apache.commons.lang3.CharRange;
+    specialinvoke $stack1.<org.apache.commons.lang3.CharRange: void <init>(char,char,boolean)>(ch, ch, 0);
+
+    return $stack1;
+}
+"
