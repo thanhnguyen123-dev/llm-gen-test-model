@@ -1,0 +1,4385 @@
+FQN,Signature,Jimple Code Representation,Generated Code
+org.apache.commons.lang3.text.WordUtils.uncapitalize(java.lang.String),java.lang.String uncapitalize(java.lang.String),"{
+    java.lang.String str;
+    unknown $stack1;
+
+
+    str := @parameter0: java.lang.String;
+    $stack1 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String uncapitalize(java.lang.String,char[])>(str, null);
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test uncapitalize a string with starting uppercase letter"")
+    void testUncapitalizeStartingUppercase() {
+        String input = ""Hello World"";
+        assertEquals(""hello World"", wordUtils.uncapitalize(input), ""Should uncapitalize the first letter"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalize a string with all lowercase letters"")
+    void testUncapitalizeAllLowercase() {
+        String input = ""hello world"";
+        assertEquals(""hello world"", wordUtils.uncapitalize(input), ""Should remain unchanged"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalize a string with alternating case letters"")
+    void testUncapitalizeAlternatingCase() {
+        String input = ""HeLlO WoRLd"";
+        assertEquals(""heLlO WoRLd"", wordUtils.uncapitalize(input), ""Should only uncapitalize the first character"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test uncapitalize a single uppercase letter"")
+    void testUncapitalizeSingleUppercaseLetter() {
+        String input = ""A"";
+        assertEquals(""a"", wordUtils.uncapitalize(input), ""Single uppercase letter should be lowercased"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalize a single lowercase letter"")
+    void testUncapitalizeSingleLowercaseLetter() {
+        String input = ""a"";
+        assertEquals(""a"", wordUtils.uncapitalize(input), ""Single lowercase letter should remain unchanged"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalize an empty string"")
+    void testUncapitalizeEmptyString() {
+        String input = """";
+        assertEquals("""", wordUtils.uncapitalize(input), ""Empty string should remain unchanged"");
+    }
+
+    // EDGE CASES (Numeric and Symbolic)
+
+    @Test
+    @DisplayName(""Test uncapitalize a string with numbers and symbols"")
+    void testUncapitalizeNumbersAndSymbols() {
+        String input = ""1234 !@#$"";
+        assertEquals(""1234 !@#$"", wordUtils.uncapitalize(input), ""String with no letters should remain unchanged"");
+    }
+
+    // ERROR CASES (Null Input)
+
+    @Test
+    @DisplayName(""Test uncapitalize a null string"")
+    void testUncapitalizeNullString() {
+        String input = null;
+        assertNull(wordUtils.uncapitalize(input), ""Null input should return null"");
+    }
+}
+```"
+"org.apache.commons.lang3.text.WordUtils.wrap(java.lang.String, int, java.lang.String, boolean)","java.lang.String wrap(java.lang.String, int, java.lang.String, boolean)","{
+    boolean wrapLongWords;
+    int wrapLength;
+    java.lang.String newLineStr, str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack8, $stack9, inputLineLength, offset, spaceToWrapAt, wrappedLine;
+
+
+    str := @parameter0: java.lang.String;
+    wrapLength := @parameter1: int;
+    newLineStr := @parameter2: java.lang.String;
+    wrapLongWords := @parameter3: boolean;
+
+    if str != null goto label01;
+
+    return null;
+
+  label01:
+    if newLineStr != null goto label02;
+    newLineStr = <org.apache.commons.lang3.SystemUtils: java.lang.String LINE_SEPARATOR>;
+
+  label02:
+    $stack38 = wrapLength;
+    $stack37 = 1;
+
+    if $stack38 >= $stack37 goto label03;
+    wrapLength = 1;
+
+  label03:
+    $stack32 = str;
+    $stack33 = virtualinvoke str.<java.lang.String: int length()>();
+    $stack34 = 0;
+    offset = $stack34;
+    $stack8 = new java.lang.StringBuilder;
+    $stack36 = inputLineLength;
+    $stack35 = 32;
+    $stack9 = $stack36 + $stack35;
+    specialinvoke $stack8.<java.lang.StringBuilder: void <init>(int)>($stack9);
+    wrappedLine = $stack8;
+
+  label04:
+    $stack20 = inputLineLength;
+    $stack19 = offset;
+    $stack10 = $stack20 - $stack19;
+    $stack21 = wrapLength;
+
+    if $stack10 <= $stack21 goto label10;
+    $stack14 = virtualinvoke str.<java.lang.String: char charAt(int)>(offset);
+
+    if $stack14 != 32 goto label05;
+    offset = offset + 1;
+
+    goto label04;
+
+  label05:
+    $stack15 = wrapLength + offset;
+    spaceToWrapAt = virtualinvoke str.<java.lang.String: int lastIndexOf(int,int)>(32, $stack15);
+
+    if spaceToWrapAt < offset goto label06;
+    $stack29 = virtualinvoke str.<java.lang.String: java.lang.String substring(int,int)>(offset, spaceToWrapAt);
+    $stack30 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack29);
+    $stack31 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(newLineStr);
+    offset = spaceToWrapAt + 1;
+
+    goto label09;
+
+  label06:
+    if wrapLongWords == 0 goto label07;
+    $stack25 = wrapLength + offset;
+    $stack26 = virtualinvoke str.<java.lang.String: java.lang.String substring(int,int)>(offset, $stack25);
+    $stack27 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack26);
+    $stack28 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(newLineStr);
+    offset = offset + wrapLength;
+
+    goto label09;
+
+  label07:
+    $stack16 = wrapLength + offset;
+    spaceToWrapAt = virtualinvoke str.<java.lang.String: int indexOf(int,int)>(32, $stack16);
+
+    if spaceToWrapAt < 0 goto label08;
+    $stack22 = virtualinvoke str.<java.lang.String: java.lang.String substring(int,int)>(offset, spaceToWrapAt);
+    $stack23 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack22);
+    $stack24 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(newLineStr);
+    offset = spaceToWrapAt + 1;
+
+    goto label09;
+
+  label08:
+    $stack17 = virtualinvoke str.<java.lang.String: java.lang.String substring(int)>(offset);
+    $stack18 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack17);
+    offset = inputLineLength;
+
+  label09:
+    goto label04;
+
+  label10:
+    $stack11 = virtualinvoke str.<java.lang.String: java.lang.String substring(int)>(offset);
+    $stack12 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack11);
+    $stack13 = virtualinvoke wrappedLine.<java.lang.StringBuilder: java.lang.String toString()>();
+
+    return $stack13;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class.
+ * Covers typical cases, edge cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test wrapping text without breaking words"")
+    void testWrapWithoutBreakingWords() {
+        String text = ""This is a simple test case for wrapping text"";
+        String expected = ""This is a\nsimple test\ncase for\nwrapping\ntext"";
+        assertEquals(expected, wordUtils.wrap(text, 10, ""\n"", false), ""Should wrap without breaking words"");
+    }
+
+    @Test
+    @DisplayName(""Test wrapping text with breaking words"")
+    void testWrapWithBreakingWords() {
+        String text = ""This is a simple test case for wrapping text"";
+        String expected = ""This is a\nsimple tes\nt case for\nwrapping t\next"";
+        assertEquals(expected, wordUtils.wrap(text, 10, ""\n"", true), ""Should wrap with breaking words"");
+    }
+
+    @Test
+    @DisplayName(""Test wrapping text with custom newline character"")
+    void testWrapWithCustomNewline() {
+        String text = ""This is a simple test case for wrapping text"";
+        String expected = ""This<NL>is a<NL>simple<NL>test<NL>case<NL>for<NL>wrapping<NL>text"";
+        assertEquals(expected, wordUtils.wrap(text, 10, ""<NL>"", false), ""Should use custom newline character"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test empty string"")
+    void testEmptyString() {
+        String text = """";
+        assertEquals("""", wordUtils.wrap(text, 10, ""\n"", false), ""Wrapping an empty string should return an empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test null string"")
+    void testNullString() {
+        assertNull(wordUtils.wrap(null, 10, ""\n"", false), ""Wrapping a null string should return null"");
+    }
+
+    @Test
+    @DisplayName(""Test single long word"")
+    void testSingleLongWord() {
+        String text = ""ThisIsASingleVeryLongWord"";
+        String expected = ""ThisIsASin\ngleVeryLo\nngWord"";
+        assertEquals(expected, wordUtils.wrap(text, 10, ""\n"", true), ""Should break a single long word"");
+    }
+
+    @Test
+    @DisplayName(""Test string with already fitting lines"")
+    void testStringWithAlreadyFittingLines() {
+        String text = ""Line1\nLine2\nLine3"";
+        assertEquals(text, wordUtils.wrap(text, 10, ""\n"", false), ""Lines fitting already should remain unchanged"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test wrapping with newLineStr as null"")
+    void testNewLineStrAsNull() {
+        String text = ""This is a test"";
+        String expected = ""This is a\n test"";
+        assertEquals(expected, wordUtils.wrap(text, 10, null, false), ""Should use system line separator if newLineStr is null"");
+    }
+
+    @Test
+    @DisplayName(""Test wrap length less than 1"")
+    void testWrapLengthLessThanOne() {
+        String text = ""This is a test"";
+        String expected = ""T\nh\ni\ns\n \ni\ns\n \na\n \nt\ne\ns\nt"";
+        assertEquals(expected, wordUtils.wrap(text, 0, ""\n"", true), ""Wrap length less than 1 should act as length 1"");
+    }
+
+    @Test
+    @DisplayName(""Test str containing only spaces"")
+    void testStrContainingOnlySpaces() {
+        String text = ""     "";
+        String expected = ""\n\n\n\n "";
+        assertEquals(expected, wordUtils.wrap(text, 1, ""\n"", false), ""Spaces should be wrapped to new lines"");
+    }
+}
+```"
+org.apache.commons.lang3.text.WordUtils.swapCase(java.lang.String),java.lang.String swapCase(java.lang.String),"{
+    java.lang.String str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack5, $stack6, $stack7, $stack8, $stack9, buffer, ch, i, whitespace;
+
+
+    str := @parameter0: java.lang.String;
+    $stack5 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack5 == 0 goto label1;
+
+    return str;
+
+  label1:
+    buffer = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    whitespace = 1;
+    i = 0;
+
+  label2:
+    $stack12 = i;
+    $stack11 = buffer;
+    $stack6 = lengthof $stack11;
+
+    if $stack12 >= $stack6 goto label8;
+    ch = buffer[i];
+    $stack8 = staticinvoke <java.lang.Character: boolean isUpperCase(char)>(ch);
+
+    if $stack8 == 0 goto label3;
+    $stack16 = staticinvoke <java.lang.Character: char toLowerCase(char)>(ch);
+    buffer[i] = $stack16;
+    whitespace = 0;
+
+    goto label7;
+
+  label3:
+    $stack9 = staticinvoke <java.lang.Character: boolean isTitleCase(char)>(ch);
+
+    if $stack9 == 0 goto label4;
+    $stack15 = staticinvoke <java.lang.Character: char toLowerCase(char)>(ch);
+    buffer[i] = $stack15;
+    whitespace = 0;
+
+    goto label7;
+
+  label4:
+    $stack10 = staticinvoke <java.lang.Character: boolean isLowerCase(char)>(ch);
+
+    if $stack10 == 0 goto label6;
+
+    if whitespace == 0 goto label5;
+    $stack14 = staticinvoke <java.lang.Character: char toTitleCase(char)>(ch);
+    buffer[i] = $stack14;
+    whitespace = 0;
+
+    goto label7;
+
+  label5:
+    $stack13 = staticinvoke <java.lang.Character: char toUpperCase(char)>(ch);
+    buffer[i] = $stack13;
+
+    goto label7;
+
+  label6:
+    whitespace = staticinvoke <java.lang.Character: boolean isWhitespace(char)>(ch);
+
+  label7:
+    i = i + 1;
+
+    goto label2;
+
+  label8:
+    $stack7 = new java.lang.String;
+    specialinvoke $stack7.<java.lang.String: void <init>(char[])>(buffer);
+
+    return $stack7;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils.swapCase method.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test swapCase with mixed case letters"")
+    void testSwapCaseMixedCase() {
+        assertEquals(""hELLO wORLD"", wordUtils.swapCase(""Hello World""), ""Should swap case for each letter"");
+        assertEquals(""jAVA pROGRAMMING"", wordUtils.swapCase(""Java Programming""), ""Should swap case for each letter"");
+    }
+
+    @Test
+    @DisplayName(""Test swapCase with all uppercase letters"")
+    void testSwapCaseAllUpper() {
+        assertEquals(""hello world"", wordUtils.swapCase(""HELLO WORLD""), ""Should convert all to lowercase"");
+    }
+
+    @Test
+    @DisplayName(""Test swapCase with all lowercase letters"")
+    void testSwapCaseAllLower() {
+        assertEquals(""HELLO WORLD"", wordUtils.swapCase(""hello world""), ""Should convert all to uppercase"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test swapCase with empty string"")
+    void testSwapCaseEmptyString() {
+        assertEquals("""", wordUtils.swapCase(""""), ""Should return empty string when input is empty"");
+    }
+
+    @Test
+    @DisplayName(""Test swapCase with single character string"")
+    void testSwapCaseSingleCharacter() {
+        assertEquals(""a"", wordUtils.swapCase(""A""), ""Should swap case of single uppercase letter"");
+        assertEquals(""Z"", wordUtils.swapCase(""z""), ""Should swap case of single lowercase letter"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test swapCase with numbers and special characters"")
+    void testSwapCaseNumbersAndSpecialChars() {
+        assertEquals(""1234 !@#$"", wordUtils.swapCase(""1234 !@#$""), ""Should not change numbers and special chars"");
+    }
+
+    @Test
+    @DisplayName(""Test swapCase with white spaces"")
+    void testSwapCaseWithSpaces() {
+        assertEquals("" tHis is a tEst "", wordUtils.swapCase("" This IS A TeST ""), ""Should handle spaces correctly"");
+        assertEquals(""a b c"", wordUtils.swapCase(""A B C""), ""Should handle spaces correctly between characters"");
+    }
+
+    @Test
+    @DisplayName(""Test swapCase with title case and whitespace handling"")
+    void testSwapCaseTitleCaseAndWhitespace() {
+        assertEquals(""hEllo World"", wordUtils.swapCase(""hELLO world""), ""Should handle whitespace transitions correctly"");
+        assertEquals(""tHis Is A tItle"", wordUtils.swapCase(""This is a TITLE""), ""Should swap correctly respecting title casing"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test swapCase with null input"")
+    void testSwapCaseNullInput() {
+        assertNull(wordUtils.swapCase(null), ""Should return null when input is null"");
+    }
+}
+```"
+org.apache.commons.lang3.text.WordUtils.capitalize(java.lang.String),java.lang.String capitalize(java.lang.String),"{
+    java.lang.String str;
+    unknown $stack1;
+
+
+    str := @parameter0: java.lang.String;
+    $stack1 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String capitalize(java.lang.String,char[])>(str, null);
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling for capitalize method.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test capitalizing a single word"")
+    void testCapitalizeSingleWord() {
+        assertEquals(""Apple"", wordUtils.capitalize(""apple""), ""Capitalize should convert first character to uppercase"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a sentence"")
+    void testCapitalizeSentence() {
+        assertEquals(""Hello World"", wordUtils.capitalize(""hello world""), ""Capitalize should convert first character of each word"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing an already capitalized sentence"")
+    void testCapitalizeAlreadyCapitalized() {
+        assertEquals(""Hello World"", wordUtils.capitalize(""Hello World""), ""Capitalize should handle already capitalized input"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test capitalizing an empty string"")
+    void testCapitalizeEmptyString() {
+        assertEquals("""", wordUtils.capitalize(""""), ""Capitalize on empty string should return empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a single character"")
+    void testCapitalizeSingleCharacter() {
+        assertEquals(""A"", wordUtils.capitalize(""a""), ""Capitalize should convert single character to uppercase"");
+        assertEquals(""B"", wordUtils.capitalize(""B""), ""Capitalize should handle already uppercase single character"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a sentence with mixed cases"")
+    void testCapitalizeMixedCase() {
+        assertEquals(""TeSt CaSe"", wordUtils.capitalize(""tESt cAsE""), ""Capitalize should normalize casing"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing with punctuation"")
+    void testCapitalizeWithPunctuation() {
+        assertEquals(""Hello, World!"", wordUtils.capitalize(""hello, world!""), ""Capitalize should ignore punctuation"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test capitalizing with whitespace"")
+    void testCapitalizeWithWhitespace() {
+        assertEquals("" Hello World"", wordUtils.capitalize("" hello world""), ""Capitalize should handle leading whitespace correctly"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing all uppercase input"")
+    void testCapitalizeAllUppercase() {
+        assertEquals(""Abc Def"", wordUtils.capitalize(""ABC DEF""), ""Capitalize should handle all uppercase input"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing string with numbers"")
+    void testCapitalizeWithNumbers() {
+        assertEquals(""123 Abc"", wordUtils.capitalize(""123 abc""), ""Capitalize should leave numbers unchanged"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test capitalizing a null string"")
+    void testCapitalizeNullInput() {
+        assertNull(wordUtils.capitalize(null), ""Capitalize null should return null"");
+    }
+}
+```"
+"org.apache.commons.lang3.text.WordUtils.capitalize(java.lang.String, char[])","java.lang.String capitalize(java.lang.String, char[])","{
+    char[] delimiters;
+    java.lang.String str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack7, $stack8, $stack9, buffer, capitalizeNext, ch, delimLen, i;
+
+
+    str := @parameter0: java.lang.String;
+    delimiters := @parameter1: char[];
+
+    if delimiters != null goto label1;
+    $stack15 = -1;
+
+    goto label2;
+
+  label1:
+    $stack15 = lengthof delimiters;
+
+  label2:
+    $stack16 = str;
+    $stack7 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>($stack16);
+
+    if $stack7 != 0 goto label3;
+
+    if delimLen != 0 goto label4;
+
+  label3:
+    $stack14 = str;
+
+    return $stack14;
+
+  label4:
+    buffer = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    capitalizeNext = 1;
+    i = 0;
+
+  label5:
+    $stack12 = i;
+    $stack11 = buffer;
+    $stack8 = lengthof $stack11;
+
+    if $stack12 >= $stack8 goto label8;
+    ch = buffer[i];
+    $stack10 = staticinvoke <org.apache.commons.lang3.text.WordUtils: boolean isDelimiter(char,char[])>(ch, delimiters);
+
+    if $stack10 == 0 goto label6;
+    capitalizeNext = 1;
+
+    goto label7;
+
+  label6:
+    if capitalizeNext == 0 goto label7;
+    $stack13 = staticinvoke <java.lang.Character: char toTitleCase(char)>(ch);
+    buffer[i] = $stack13;
+    capitalizeNext = 0;
+
+  label7:
+    i = i + 1;
+
+    goto label5;
+
+  label8:
+    $stack9 = new java.lang.String;
+    specialinvoke $stack9.<java.lang.String: void <init>(char[])>(buffer);
+
+    return $stack9;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test capitalizing a simple sentence with space delimiter"")
+    void testCapitalizeSimpleSentence() {
+        String input = ""hello world"";
+        char[] delimiters = {' '};
+        assertEquals(""Hello World"", wordUtils.capitalize(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a sentence with multiple spaces as delimiters"")
+    void testCapitalizeSentenceWithMultipleSpaces() {
+        String input = ""hello   world"";
+        char[] delimiters = {' '};
+        assertEquals(""Hello   World"", wordUtils.capitalize(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a sentence with mixed delimiters"")
+    void testCapitalizeSentenceWithMixedDelimiters() {
+        String input = ""hello-world_of java"";
+        char[] delimiters = {' ', '-', '_'};
+        assertEquals(""Hello-World_Of Java"", wordUtils.capitalize(input, delimiters));
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test capitalizing an empty string"")
+    void testCapitalizeEmptyString() {
+        String input = """";
+        char[] delimiters = {' '};
+        assertEquals("""", wordUtils.capitalize(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a single character string"")
+    void testCapitalizeSingleCharacterString() {
+        String input = ""a"";
+        char[] delimiters = {' '};
+        assertEquals(""A"", wordUtils.capitalize(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a string with no delimiters"")
+    void testCapitalizeNoDelimiters() {
+        String input = ""helloworld"";
+        char[] delimiters = {};
+        assertEquals(""Helloworld"", wordUtils.capitalize(input, delimiters));
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test capitalizing when string is already capitalized"")
+    void testCapitalizeAlreadyCapitalized() {
+        String input = ""Hello World"";
+        char[] delimiters = {' '};
+        assertEquals(""Hello World"", wordUtils.capitalize(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing with null delimiters"")
+    void testCapitalizeNullDelimiters() {
+        String input = ""hello world"";
+        assertEquals(""Hello World"", wordUtils.capitalize(input, null));
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test capitalizing a null string"")
+    void testCapitalizeNullString() {
+        assertThrows(NullPointerException.class, () -> {
+            wordUtils.capitalize(null, new char[] {' '});
+        });
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing with empty delimiters when string has spaces"")
+    void testCapitalizeEmptyDelimitersWithSpaces() {
+        String input = ""hello world"";
+        char[] delimiters = {};
+        assertEquals(""Helloworld"", wordUtils.capitalize(input, delimiters), ""Spaces should be ignored, entire string treated as one word"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing with all delimiter characters present"")
+    void testCapitalizeWithAllDelimiterCharacters() {
+        String input = ""-_ "";
+        char[] delimiters = {' ', '-', '_'};
+        assertEquals(""-_ "", wordUtils.capitalize(input, delimiters), ""Should not change when only delimiters are present"");
+    }
+}
+```"
+"org.apache.commons.lang3.text.WordUtils.capitalizeFully(java.lang.String, char[])","java.lang.String capitalizeFully(java.lang.String, char[])","{
+    char[] delimiters;
+    java.lang.String str;
+    unknown $stack3, $stack4, $stack5, $stack6, $stack7, delimLen;
+
+
+    str := @parameter0: java.lang.String;
+    delimiters := @parameter1: char[];
+
+    if delimiters != null goto label1;
+    $stack6 = -1;
+
+    goto label2;
+
+  label1:
+    $stack6 = lengthof delimiters;
+
+  label2:
+    $stack7 = str;
+    $stack3 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>($stack7);
+
+    if $stack3 != 0 goto label3;
+
+    if delimLen != 0 goto label4;
+
+  label3:
+    $stack5 = str;
+
+    return $stack5;
+
+  label4:
+    str = virtualinvoke str.<java.lang.String: java.lang.String toLowerCase()>();
+    $stack4 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String capitalize(java.lang.String,char[])>(str, delimiters);
+
+    return $stack4;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.apache.commons.lang3.StringUtils;
+
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test capitalizing a fully lowercase string with spaces as delimiters"")
+    void testCapitalizeFullyLowercase() {
+        String input = ""this is a test"";
+        char[] delimiters = {' '};
+        String expected = ""This Is A Test"";
+        assertEquals(expected, wordUtils.capitalizeFully(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a mixed case string with spaces as delimiters"")
+    void testCapitalizeFullyMixedCase() {
+        String input = ""tHiS iS A tEsT"";
+        char[] delimiters = {' '};
+        String expected = ""This Is A Test"";
+        assertEquals(expected, wordUtils.capitalizeFully(input, delimiters));
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test capitalizing an empty string"")
+    void testCapitalizeFullyEmptyString() {
+        String input = """";
+        char[] delimiters = {' '};
+        String expected = """";
+        assertEquals(expected, wordUtils.capitalizeFully(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a string without delimiters"")
+    void testCapitalizeFullyNoDelimiters() {
+        String input = ""onetest"";
+        char[] delimiters = {};
+        String expected = ""Onetest"";
+        assertEquals(expected, wordUtils.capitalizeFully(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing a string with multiple delimiters"")
+    void testCapitalizeFullyMultipleDelimiters() {
+        String input = ""this,is.a-test"";
+        char[] delimiters = {',', '.', '-'};
+        String expected = ""This,Is.A-Test"";
+        assertEquals(expected, wordUtils.capitalizeFully(input, delimiters));
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test capitalizing with a null string"")
+    void testCapitalizeFullyNullString() {
+        String input = null;
+        char[] delimiters = {' '};
+        assertNull(wordUtils.capitalizeFully(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing with null delimiters"")
+    void testCapitalizeFullyNullDelimiters() {
+        String input = ""this is a test"";
+        char[] delimiters = null;
+        String expected = ""This is a test"";
+        assertEquals(expected, wordUtils.capitalizeFully(input, delimiters));
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test capitalizing when the string is already capitalized"")
+    void testCapitalizeFullyAlreadyCapitalized() {
+        String input = ""This Is A Test"";
+        char[] delimiters = {' '};
+        String expected = ""This Is A Test"";
+        assertEquals(expected, wordUtils.capitalizeFully(input, delimiters));
+    }
+
+    @Test
+    @DisplayName(""Test capitalizing with special characters as delimiters"")
+    void testCapitalizeFullySpecialCharacterDelimiters() {
+        String input = ""one#two$three"";
+        char[] delimiters = {'#', '$'};
+        String expected = ""One#Two$Three"";
+        assertEquals(expected, wordUtils.capitalizeFully(input, delimiters));
+    }
+}
+```"
+"org.apache.commons.lang3.text.WordUtils.uncapitalize(java.lang.String, char[])","java.lang.String uncapitalize(java.lang.String, char[])","{
+    char[] delimiters;
+    java.lang.String str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack7, $stack8, $stack9, buffer, ch, delimLen, i, uncapitalizeNext;
+
+
+    str := @parameter0: java.lang.String;
+    delimiters := @parameter1: char[];
+
+    if delimiters != null goto label1;
+    $stack15 = -1;
+
+    goto label2;
+
+  label1:
+    $stack15 = lengthof delimiters;
+
+  label2:
+    $stack16 = str;
+    $stack7 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>($stack16);
+
+    if $stack7 != 0 goto label3;
+
+    if delimLen != 0 goto label4;
+
+  label3:
+    $stack14 = str;
+
+    return $stack14;
+
+  label4:
+    buffer = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    uncapitalizeNext = 1;
+    i = 0;
+
+  label5:
+    $stack12 = i;
+    $stack11 = buffer;
+    $stack8 = lengthof $stack11;
+
+    if $stack12 >= $stack8 goto label8;
+    ch = buffer[i];
+    $stack10 = staticinvoke <org.apache.commons.lang3.text.WordUtils: boolean isDelimiter(char,char[])>(ch, delimiters);
+
+    if $stack10 == 0 goto label6;
+    uncapitalizeNext = 1;
+
+    goto label7;
+
+  label6:
+    if uncapitalizeNext == 0 goto label7;
+    $stack13 = staticinvoke <java.lang.Character: char toLowerCase(char)>(ch);
+    buffer[i] = $stack13;
+    uncapitalizeNext = 0;
+
+  label7:
+    i = i + 1;
+
+    goto label5;
+
+  label8:
+    $stack9 = new java.lang.String;
+    specialinvoke $stack9.<java.lang.String: void <init>(char[])>(buffer);
+
+    return $stack9;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class, uncapitalize method.
+ * Covers typical cases, edge cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test uncapitalizing a string with spaces as delimiters"")
+    void testUncapitalizeWithSpaces() {
+        char[] delimiters = {' '};
+        assertEquals(""hello world"", wordUtils.uncapitalize(""Hello World"", delimiters), ""Should uncapitalize each word"");
+        assertEquals(""java programming"", wordUtils.uncapitalize(""Java Programming"", delimiters), ""Should uncapitalize each word"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalizing a string with commas as delimiters"")
+    void testUncapitalizeWithCommas() {
+        char[] delimiters = {','};
+        assertEquals(""hello,world"", wordUtils.uncapitalize(""Hello,World"", delimiters), ""Should uncapitalize each word separated by comma"");
+        assertEquals(""java,programming"", wordUtils.uncapitalize(""Java,Programming"", delimiters), ""Should uncapitalize each word separated by comma"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalizing with default delimiters (no delimiters provided)"")
+    void testUncapitalizeWithNoDelimiters() {
+        assertEquals(""javaProgramming"", wordUtils.uncapitalize(""javaProgramming"", null), ""Should not change string"");
+        assertEquals(""helloWorld"", wordUtils.uncapitalize(""HelloWorld"", null), ""Should only uncapitalize first character"");
+    }
+
+    // EDGE CASES (Empty and Null strings)
+
+    @Test
+    @DisplayName(""Test uncapitalizing an empty string"")
+    void testUncapitalizeEmptyString() {
+        char[] delimiters = {' '};
+        assertEquals("""", wordUtils.uncapitalize("""", delimiters), ""Uncapitalizing should return empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalizing a null string"")
+    void testUncapitalizeNullString() {
+        char[] delimiters = {' '};
+        assertNull(wordUtils.uncapitalize(null, delimiters), ""Uncapitalizing null should return null"");
+    }
+
+    // EDGE CASES (Special Characters and casing)
+
+    @Test
+    @DisplayName(""Test uncapitalizing with special characters"")
+    void testUncapitalizeWithSpecialCharacters() {
+        char[] delimiters = {'!', '?'};
+        assertEquals(""hello! world?"", wordUtils.uncapitalize(""Hello! World?"", delimiters), ""Should uncapitalize words separated by special characters"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalizing with mixed-case words"")
+    void testUncapitalizeMixedCase() {
+        char[] delimiters = {' '};
+        assertEquals(""java programming is fun"", wordUtils.uncapitalize(""JAVA Programming IS fun"", delimiters), ""Should uncapitalize the first character of each word"");
+    }
+
+    // EDGE CASES (Boundary Cases)
+
+    @Test
+    @DisplayName(""Test uncapitalizing when string already uncapitalized"")
+    void testAlreadyUncapitalizedString() {
+        char[] delimiters = {' '};
+        assertEquals(""java programming"", wordUtils.uncapitalize(""java programming"", delimiters), ""Uncapitalized string should remain the same"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalizing when all characters are delimiters"")
+    void testAllCharactersAsDelimiters() {
+        char[] delimiters = {' '};
+        assertEquals("""", wordUtils.uncapitalize(""    "", delimiters), ""String with only delimiters should return empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test uncapitalizing with mixed delimiters"")
+    void testUncapitalizeWithMixedDelimiters() {
+        char[] delimiters = {' ', ','};
+        assertEquals(""hello world, how are you"", wordUtils.uncapitalize(""Hello World, How Are You"", delimiters), ""Should uncapitalize words separated by mixed delimiters"");
+    }
+}
+```"
+"org.apache.commons.lang3.text.WordUtils.initials(java.lang.String, char[])","java.lang.String initials(java.lang.String, char[])","{
+    char[] delimiters;
+    java.lang.String str;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack8, $stack9, buf, ch, count, i, lastWasGap, strLen;
+
+
+    str := @parameter0: java.lang.String;
+    delimiters := @parameter1: char[];
+    $stack8 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack8 == 0 goto label1;
+
+    return str;
+
+  label1:
+    if delimiters == null goto label2;
+    $stack16 = lengthof delimiters;
+
+    if $stack16 != 0 goto label2;
+
+    return """";
+
+  label2:
+    $stack17 = str;
+    $stack18 = virtualinvoke str.<java.lang.String: int length()>();
+    $stack20 = strLen;
+    $stack19 = 2;
+    $stack9 = $stack20 / $stack19;
+    $stack21 = 1;
+    $stack10 = $stack9 + $stack21;
+    $stack22 = newarray (char)[$stack10];
+    $stack23 = 0;
+    count = $stack23;
+    $stack24 = 1;
+    lastWasGap = $stack24;
+    $stack25 = 0;
+    i = $stack25;
+
+  label3:
+    $stack14 = i;
+    $stack13 = strLen;
+
+    if $stack14 >= $stack13 goto label6;
+    ch = virtualinvoke str.<java.lang.String: char charAt(int)>(i);
+    $stack12 = staticinvoke <org.apache.commons.lang3.text.WordUtils: boolean isDelimiter(char,char[])>(ch, delimiters);
+
+    if $stack12 == 0 goto label4;
+    lastWasGap = 1;
+
+    goto label5;
+
+  label4:
+    if lastWasGap == 0 goto label5;
+    $stack15 = count;
+    count = count + 1;
+    buf[$stack15] = ch;
+    lastWasGap = 0;
+
+  label5:
+    i = i + 1;
+
+    goto label3;
+
+  label6:
+    $stack11 = new java.lang.String;
+    specialinvoke $stack11.<java.lang.String: void <init>(char[],int,int)>(buf, 0, count);
+
+    return $stack11;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test initials with a simple string and space delimiters"")
+    void testInitialsSimpleString() {
+        assertEquals(""JD"", wordUtils.initials(""John Doe"", new char[] {' '}), ""Initials should be JD for 'John Doe' with space delimiter"");
+    }
+
+    @Test
+    @DisplayName(""Test initials with multiple delimiters"")
+    void testInitialsMultipleDelimiters() {
+        assertEquals(""JSM"", wordUtils.initials(""John,Smith-Miller"", new char[] {',', '-'}), ""Initials should be JSM for 'John,Smith-Miller'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test initials with a single word"")
+    void testInitialsSingleWord() {
+        assertEquals(""J"", wordUtils.initials(""John"", new char[] {' '}), ""Initials should be J for 'John' with space delimiter"");
+    }
+
+    @Test
+    @DisplayName(""Test initials with no delimiters"")
+    void testInitialsNoDelimiters() {
+        assertEquals("""", wordUtils.initials(""John Doe"", null), ""Initials should be empty when delimiters are null"");
+    }
+
+    @Test
+    @DisplayName(""Test initials with empty delimiters array"")
+    void testInitialsEmptyDelimitersArray() {
+        assertEquals("""", wordUtils.initials(""John Doe"", new char[] {}), ""Initials should be empty with empty delimiters array"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test initials with null string"")
+    void testInitialsNullString() {
+        assertNull(wordUtils.initials(null, new char[] {' '}), ""Initials should be null for null string"");
+    }
+
+    @Test
+    @DisplayName(""Test initials with empty string"")
+    void testInitialsEmptyString() {
+        assertEquals("""", wordUtils.initials("""", new char[] {' '}), ""Initials should be empty for an empty string"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test initials with consecutive delimiters"")
+    void testInitialsConsecutiveDelimiters() {
+        assertEquals(""J"", wordUtils.initials(""John--Doe"", new char[] {'-'}), ""Initials should be J for 'John--Doe' with '-' delimiter"");
+    }
+
+    @Test
+    @DisplayName(""Test initials when the string starts with delimiters"")
+    void testInitialsStartingDelimiters() {
+        assertEquals(""D"", wordUtils.initials(""--Doe"", new char[] {'-'}), ""Initials should be D for '--Doe' with '-' delimiter"");
+    }
+
+    @Test
+    @DisplayName(""Test initials when the string ends with delimiters"")
+    void testInitialsEndingDelimiters() {
+        assertEquals(""J"", wordUtils.initials(""John--"", new char[] {'-'}), ""Initials should be J for 'John--' with '-' delimiter"");
+    }
+
+    @Test
+    @DisplayName(""Test initials with delimiters that are also letters"")
+    void testInitialsWithLetterDelimiters() {
+        assertEquals(""JM"", wordUtils.initials(""JohnXMiller"", new char[] {'X'}), ""Initials should be JM for 'JohnXMiller' with 'X' delimiter"");
+    }
+
+    @Test
+    @DisplayName(""Test initials with all characters being delimiters"")
+    void testInitialsAllDelimiters() {
+        assertEquals("""", wordUtils.initials(""----"", new char[] {'-'}), ""Initials should be empty for '----' with '-' delimiter"");
+    }
+
+    @Test
+    @DisplayName(""Test initials with non-Latin characters"")
+    void testInitialsNonLatinCharacters() {
+        assertEquals(""ドサ"", wordUtils.initials(""ドラえもん サザエさん"", new char[] {' '}), ""Initials should be ドサ for 'ドラえもん サザエさん' with space delimiter"");
+    }
+}
+```"
+org.apache.commons.lang3.text.WordUtils.initials(java.lang.String),java.lang.String initials(java.lang.String),"{
+    java.lang.String str;
+    unknown $stack1;
+
+
+    str := @parameter0: java.lang.String;
+    $stack1 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String initials(java.lang.String,char[])>(str, null);
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class initials method.
+ * Covers typical cases, edge cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test initials from a regular sentence"")
+    void testInitialsRegularSentence() {
+        String input = ""John Doe Smith"";
+        assertEquals(""JDS"", wordUtils.initials(input), ""Initials of 'John Doe Smith' should be 'JDS'"");
+    }
+
+    @Test
+    @DisplayName(""Test initials from a single word"")
+    void testInitialsSingleWord() {
+        String input = ""Single"";
+        assertEquals(""S"", wordUtils.initials(input), ""Initials of 'Single' should be 'S'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test initials from an empty string"")
+    void testInitialsEmptyString() {
+        String input = """";
+        assertEquals("""", wordUtils.initials(input), ""Initials of an empty string should be an empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test initials from a string with leading spaces"")
+    void testInitialsLeadingSpaces() {
+        String input = ""   Leading Space"";
+        assertEquals(""LS"", wordUtils.initials(input), ""Initials of '   Leading Space' should be 'LS'"");
+    }
+
+    @Test
+    @DisplayName(""Test initials from a string with trailing spaces"")
+    void testInitialsTrailingSpaces() {
+        String input = ""Trailing Space   "";
+        assertEquals(""TS"", wordUtils.initials(input), ""Initials of 'Trailing Space   ' should be 'TS'"");
+    }
+
+    @Test
+    @DisplayName(""Test initials from a string with multiple spaces between words"")
+    void testInitialsMultipleSpacesBetweenWords() {
+        String input = ""Multiple   Spaces"";
+        assertEquals(""MS"", wordUtils.initials(input), ""Initials of 'Multiple   Spaces' should be 'MS'"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test initials from a null string"")
+    void testInitialsNullString() {
+        String input = null;
+        assertNull(wordUtils.initials(input), ""Initials of a null string should be null"");
+    }
+
+    @Test
+    @DisplayName(""Test initials from a string with no alphabetic characters"")
+    void testInitialsNoAlphabeticCharacters() {
+        String input = ""1234 #$%"";
+        assertEquals("""", wordUtils.initials(input), ""Initials of a string with no alphabetic characters should be an empty string"");
+    }
+}
+```"
+"org.apache.commons.lang3.text.WordUtils.isDelimiter(char, char[])","boolean isDelimiter(char, char[])","{
+    char ch;
+    char[] delimiters;
+    unknown $stack6, $stack7, $stack8, delimiter, l2, l3, l4;
+
+
+    ch := @parameter0: char;
+    delimiters := @parameter1: char[];
+
+    if delimiters != null goto label1;
+    $stack8 = staticinvoke <java.lang.Character: boolean isWhitespace(char)>(ch);
+
+    return $stack8;
+
+  label1:
+    l2 = delimiters;
+    l3 = lengthof l2;
+    l4 = 0;
+
+  label2:
+    $stack7 = l4;
+    $stack6 = l3;
+
+    if $stack7 >= $stack6 goto label4;
+    delimiter = l2[l4];
+
+    if ch != delimiter goto label3;
+
+    return 1;
+
+  label3:
+    l4 = l4 + 1;
+
+    goto label2;
+
+  label4:
+    return 0;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test if a character is a space when delimiters are null"")
+    void testIsDelimiterSpaceWhenDelimitersNull() {
+        assertTrue(wordUtils.isDelimiter(' ', null), ""Space should be considered a delimiter when delimiters are null"");
+    }
+
+    @Test
+    @DisplayName(""Test if a character is not a delimiter when delimiters are null"")
+    void testIsNotDelimiterWhenDelimitersNull() {
+        assertFalse(wordUtils.isDelimiter('a', null), ""Character 'a' should not be a delimiter when delimiters are null"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test single character delimiter match"")
+    void testSingleCharacterDelimiterMatch() {
+        char[] delimiters = {','};
+        assertTrue(wordUtils.isDelimiter(',', delimiters), ""Comma should be a delimiter when it matches one of the delimiters"");
+    }
+
+    @Test
+    @DisplayName(""Test multiple character delimiter match"")
+    void testMultipleCharacterDelimiterMatch() {
+        char[] delimiters = {',', ';', '.'};
+        assertTrue(wordUtils.isDelimiter(';', delimiters), ""Semicolon should be a delimiter when it matches one of the delimiters"");
+    }
+
+    @Test
+    @DisplayName(""Test no match with multiple delimiters"")
+    void testNoMatchWithMultipleDelimiters() {
+        char[] delimiters = {',', ';', '.'};
+        assertFalse(wordUtils.isDelimiter('-', delimiters), ""Dash should not be a delimiter when it does not match any of the delimiters"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test behavior with empty delimiter array"")
+    void testEmptyDelimiterArray() {
+        char[] delimiters = {};
+        assertFalse(wordUtils.isDelimiter('a', delimiters), ""No character should be a delimiter when delimiters array is empty"");
+    }
+
+    @Test
+    @DisplayName(""Test character outside common delimiters"")
+    void testCharacterOutsideCommonDelimiters() {
+        char[] delimiters = {',', ';', ':'};
+        assertFalse(wordUtils.isDelimiter('z', delimiters), ""Character 'z' should not be a delimiter with common delimiters"");
+    }
+
+    @Test
+    @DisplayName(""Test non-space when delimiters are null"")
+    void testNonSpaceWhenDelimitersNull() {
+        assertFalse(wordUtils.isDelimiter('\t', null), ""Tab should not be considered a delimiter when delimiters are null"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test character is the first delimiter"")
+    void testCharacterIsFirstDelimiter() {
+        char[] delimiters = {'a', 'b', 'c'};
+        assertTrue(wordUtils.isDelimiter('a', delimiters), ""Character 'a' should be a delimiter as it is the first in the array"");
+    }
+
+    @Test
+    @DisplayName(""Test character is the last delimiter"")
+    void testCharacterIsLastDelimiter() {
+        char[] delimiters = {'x', 'y', 'z'};
+        assertTrue(wordUtils.isDelimiter('z', delimiters), ""Character 'z' should be a delimiter as it is the last in the array"");
+    }
+
+    @Test
+    @DisplayName(""Test single character that is not in the delimiters"")
+    void testSingleCharacterNotInDelimiters() {
+        char[] delimiters = {'a'};
+        assertFalse(wordUtils.isDelimiter('b', delimiters), ""Character 'b' should not be a delimiter if not in single-character array"");
+    }
+}
+```"
+"org.apache.commons.lang3.text.WordUtils.wrap(java.lang.String, int)","java.lang.String wrap(java.lang.String, int)","{
+    int wrapLength;
+    java.lang.String str;
+    unknown $stack2;
+
+
+    str := @parameter0: java.lang.String;
+    wrapLength := @parameter1: int;
+    $stack2 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String wrap(java.lang.String,int,java.lang.String,boolean)>(str, wrapLength, null, 0);
+
+    return $stack2;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class wrap method.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test wrapping a short sentence with reasonable wrap length"")
+    void testWrapShortSentenceReasonableLength() {
+        String str = ""The quick brown fox jumps over the lazy dog"";
+        int wrapLength = 10;
+        String expected = ""The quick\nbrown fox\njumps over\nthe lazy\ndog"";
+        assertEquals(expected, WordUtils.wrap(str, wrapLength), ""Should wrap correctly around 10 characters"");
+    }
+
+    @Test
+    @DisplayName(""Test wrapping with a single word longer than wrap length"")
+    void testWrapSingleLongWord() {
+        String str = ""Supercalifragilisticexpialidocious"";
+        int wrapLength = 10;
+        String expected = ""Supercalifragilisticexpialidocious"";
+        assertEquals(expected, WordUtils.wrap(str, wrapLength), ""A single long word should not be broken or wrapped"");
+    }
+
+    @Test
+    @DisplayName(""Test wrapping with multiple spaces and wrap length"")
+    void testWrapWithSpaces() {
+        String str = ""  The   quick   brown   fox   "";
+        int wrapLength = 10;
+        String expected = ""  The\nquick\nbrown\nfox"";
+        assertEquals(expected, WordUtils.wrap(str.trim(), wrapLength), ""Should wrap correctly ignoring leading/trailing spaces"");
+    }
+
+    @Test
+    @DisplayName(""Test wrapping with wrap length equal to string length"")
+    void testWrapLengthEqualToStringLength() {
+        String str = ""Hello"";
+        int wrapLength = 5;
+        String expected = ""Hello"";
+        assertEquals(expected, WordUtils.wrap(str, wrapLength), ""No wrap should occur for equal length"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test wrapping an empty string"")
+    void testWrapEmptyString() {
+        String str = """";
+        int wrapLength = 10;
+        String expected = """";
+        assertEquals(expected, WordUtils.wrap(str, wrapLength), ""Empty string should return empty"");
+    }
+
+    @Test
+    @DisplayName(""Test wrapping with a wrap length of zero"")
+    void testWrapWithZeroLength() {
+        String str = ""Text with some length"";
+        int wrapLength = 0;
+        assertThrows(IllegalArgumentException.class, () -> {
+            WordUtils.wrap(str, wrapLength);
+        }, ""Zero wrap length should throw IllegalArgumentException"");
+    }
+
+    @Test
+    @DisplayName(""Test wrapping a null string"")
+    void testWrapNullString() {
+        String str = null;
+        int wrapLength = 10;
+        assertThrows(IllegalArgumentException.class, () -> {
+            WordUtils.wrap(str, wrapLength);
+        }, ""Null string should throw IllegalArgumentException"");
+    }
+
+    // BOUNDARY CASES
+
+    @Test
+    @DisplayName(""Test wrapping with wrap length of 1"")
+    void testWrapLengthOfOne() {
+        String str = ""abc def"";
+        int wrapLength = 1;
+        String expected = ""abc\ndef"";
+        assertEquals(expected, WordUtils.wrap(str, wrapLength), ""Should wrap at each whitespace or leave single letters"");
+    }
+
+    @Test
+    @DisplayName(""Test wrapping with negative wrap length"")
+    void testWrapWithNegativeLength() {
+        String str = ""Negative length test"";
+        int wrapLength = -5;
+        assertThrows(IllegalArgumentException.class, () -> {
+            WordUtils.wrap(str, wrapLength);
+        }, ""Negative wrap length should throw IllegalArgumentException"");
+    }
+}
+```"
+org.apache.commons.lang3.text.WordUtils.capitalizeFully(java.lang.String),java.lang.String capitalizeFully(java.lang.String),"{
+    java.lang.String str;
+    unknown $stack1;
+
+
+    str := @parameter0: java.lang.String;
+    $stack1 = staticinvoke <org.apache.commons.lang3.text.WordUtils: java.lang.String capitalizeFully(java.lang.String,char[])>(str, null);
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3.text;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the WordUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class WordUtilsTest {
+
+    private WordUtils wordUtils;
+
+    @BeforeEach
+    void setUp() {
+        wordUtils = new WordUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test capitalizeFully with normal sentence"")
+    void testCapitalizeFullyNormalSentence() {
+        String input = ""this is a test"";
+        String expected = ""This Is A Test"";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Each word should start with an uppercase letter"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizeFully with already capitalized sentence"")
+    void testCapitalizeFullyAlreadyCapitalized() {
+        String input = ""This Is A Test"";
+        String expected = ""This Is A Test"";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Output should match input for already capitalized input"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizeFully with mixed case sentence"")
+    void testCapitalizeFullyMixedCase() {
+        String input = ""tHiS iS a TeST"";
+        String expected = ""This Is A Test"";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Output should be properly capitalized"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizeFully with single word"")
+    void testCapitalizeFullySingleWord() {
+        String input = ""example"";
+        String expected = ""Example"";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Single word should start with an uppercase letter"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test capitalizeFully with empty string"")
+    void testCapitalizeFullyEmptyString() {
+        String input = """";
+        String expected = """";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Empty string should return an empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizeFully with single character"")
+    void testCapitalizeFullySingleCharacter() {
+        String input = ""a"";
+        String expected = ""A"";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Single character should be capitalized"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizeFully with single uppercase character"")
+    void testCapitalizeFullySingleUpperCharacter() {
+        String input = ""A"";
+        String expected = ""A"";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Single uppercase character should remain uppercase"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizeFully with sentence containing numbers and symbols"")
+    void testCapitalizeFullyWithNumbersAndSymbols() {
+        String input = ""example 123 test!"";
+        String expected = ""Example 123 Test!"";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Numbers and symbols should remain unchanged"");
+    }
+
+    @Test
+    @DisplayName(""Test capitalizeFully with spaces and tabs"")
+    void testCapitalizeFullyWithSpacesAndTabs() {
+        String input = ""   this   is\ta   test  "";
+        String expected = ""   This   Is\tA   Test  "";
+        assertEquals(expected, wordUtils.capitalizeFully(input), ""Spaces and tabs should be preserved"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test capitalizeFully with null string"")
+    void testCapitalizeFullyNullString() {
+        String input = null;
+        assertThrows(NullPointerException.class, () -> {
+            wordUtils.capitalizeFully(input);
+        }, ""Should throw NullPointerException for null input"");
+    }
+}
+```"
+"org.apache.commons.lang3.CharSetUtils.delete(java.lang.String, java.lang.String[])","java.lang.String delete(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack2, $stack3, $stack4, $stack5;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    $stack2 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack2 != 0 goto label1;
+    $stack3 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack3 == 0 goto label2;
+
+  label1:
+    $stack5 = str;
+
+    return $stack5;
+
+  label2:
+    $stack4 = staticinvoke <org.apache.commons.lang3.CharSetUtils: java.lang.String modify(java.lang.String,java.lang.String[],boolean)>(str, set, 0);
+
+    return $stack4;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharSetUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharSetUtilsTest {
+
+    private CharSetUtils charSetUtils;
+
+    @BeforeEach
+    void setUp() {
+        charSetUtils = new CharSetUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test deleting characters from a string with one set"")
+    void testDeleteWithOneSet() {
+        String result = charSetUtils.delete(""hello world"", new String[]{""aeiou""});
+        assertEquals(""hll wrld"", result, ""Should remove vowels from 'hello world'"");
+    }
+
+    @Test
+    @DisplayName(""Test deleting characters from a string with multiple sets"")
+    void testDeleteWithMultipleSets() {
+        String result = charSetUtils.delete(""banana"", new String[]{""aeiou"", ""b""});
+        assertEquals(""nn"", result, ""Should remove vowels and 'b' from 'banana'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test deleting characters with an empty string and non-empty set"")
+    void testDeleteWithEmptyString() {
+        String result = charSetUtils.delete("""", new String[]{""aeiou""});
+        assertEquals("""", result, ""Empty string should remain unchanged"");
+    }
+
+    @Test
+    @DisplayName(""Test deleting characters with a null string and non-empty set"")
+    void testDeleteWithNullString() {
+        String result = charSetUtils.delete(null, new String[]{""aeiou""});
+        assertNull(result, ""Null string should remain null"");
+    }
+
+    @Test
+    @DisplayName(""Test deleting characters with a non-empty string and an empty set"")
+    void testDeleteWithEmptySet() {
+        String result = charSetUtils.delete(""hello"", new String[]{});
+        assertEquals(""hello"", result, ""String should remain unchanged when set is empty"");
+    }
+
+    @Test
+    @DisplayName(""Test deleting characters with a non-empty string and a null set"")
+    void testDeleteWithNullSet() {
+        String result = charSetUtils.delete(""hello"", null);
+        assertEquals(""hello"", result, ""String should remain unchanged when set is null"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test deleting characters with all set elements empty"")
+    void testDeleteWithAllEmptySetElements() {
+        String result = charSetUtils.delete(""test"", new String[]{"""", """"});
+        assertEquals(""test"", result, ""String should remain unchanged when all set elements are empty"");
+    }
+
+    @Test
+    @DisplayName(""Test deleting with overlapping character sets"")
+    void testDeleteWithOverlappingSets() {
+        String result = charSetUtils.delete(""abcd"", new String[]{""abc"", ""bcd""});
+        assertEquals("""", result, ""Should remove all characters due to overlapping sets"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test deleting characters from a null string and a null set"")
+    void testDeleteWithNullStringAndSet() {
+        String result = charSetUtils.delete(null, null);
+        assertNull(result, ""Null string should remain null even when set is also null"");
+    }
+}
+```"
+"org.apache.commons.lang3.CharSetUtils.modify(java.lang.String, java.lang.String[], boolean)","java.lang.String modify(java.lang.String, java.lang.String[], boolean)","{
+    boolean expect;
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack8, $stack9, buffer, chars, chrs, i, sz;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    expect := @parameter2: boolean;
+    chars = staticinvoke <org.apache.commons.lang3.CharSet: org.apache.commons.lang3.CharSet getInstance(java.lang.String[])>(set);
+    $stack8 = new java.lang.StringBuilder;
+    $stack9 = virtualinvoke str.<java.lang.String: int length()>();
+    specialinvoke $stack8.<java.lang.StringBuilder: void <init>(int)>($stack9);
+    buffer = $stack8;
+    chrs = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    sz = lengthof chrs;
+    i = 0;
+
+  label1:
+    $stack14 = i;
+    $stack13 = sz;
+
+    if $stack14 >= $stack13 goto label3;
+    $stack11 = chrs[i];
+    $stack12 = virtualinvoke chars.<org.apache.commons.lang3.CharSet: boolean contains(char)>($stack11);
+
+    if $stack12 != expect goto label2;
+    $stack15 = chrs[i];
+    $stack16 = virtualinvoke buffer.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack15);
+
+  label2:
+    i = i + 1;
+
+    goto label1;
+
+  label3:
+    $stack10 = virtualinvoke buffer.<java.lang.StringBuilder: java.lang.String toString()>();
+
+    return $stack10;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharSetUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharSetUtilsTest {
+
+    private CharSetUtils charSetUtils;
+
+    @BeforeEach
+    void setUp() {
+        charSetUtils = new CharSetUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test modifying string with expected characters in the set"")
+    void testModifyWithExpectedCharacters() {
+        String str = ""abcdef"";
+        String[] set = {""abc""};
+        boolean expect = true;
+        assertEquals(""abc"", charSetUtils.modify(str, set, expect), ""Result should be 'abc' for input 'abcdef' with set 'abc' and expect true"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying string with expected characters not in the set"")
+    void testModifyWithoutExpectedCharacters() {
+        String str = ""abcdef"";
+        String[] set = {""ghij""};
+        boolean expect = true;
+        assertEquals("""", charSetUtils.modify(str, set, expect), ""Result should be '' for input 'abcdef' with set 'ghij' and expect true"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying string by excluding characters in the set"")
+    void testModifyExcludingCharacters() {
+        String str = ""abcdef"";
+        String[] set = {""abc""};
+        boolean expect = false;
+        assertEquals(""def"", charSetUtils.modify(str, set, expect), ""Result should be 'def' for input 'abcdef' with set 'abc' and expect false"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying string by excluding characters not in the set"")
+    void testModifyExcludingWithoutCharacters() {
+        String str = ""abcdef"";
+        String[] set = {""ghij""};
+        boolean expect = false;
+        assertEquals(""abcdef"", charSetUtils.modify(str, set, expect), ""Result should be 'abcdef' for input 'abcdef' with set 'ghij' and expect false"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test modifying an empty string"")
+    void testModifyEmptyString() {
+        String str = """";
+        String[] set = {""abc""};
+        boolean expect = true;
+        assertEquals("""", charSetUtils.modify(str, set, expect), ""Result should be '' for empty input string"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying string with empty set"")
+    void testModifyWithEmptySet() {
+        String str = ""abcdef"";
+        String[] set = {};
+        boolean expect = true;
+        assertEquals("""", charSetUtils.modify(str, set, expect), ""Result should be '' for input 'abcdef' with empty set and expect true"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying null string"")
+    void testModifyNullString() {
+        String str = null;
+        String[] set = {""abc""};
+        boolean expect = true;
+        assertThrows(NullPointerException.class, () -> {
+            charSetUtils.modify(str, set, expect);
+        }, ""Should throw NullPointerException for null string"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying with null set"")
+    void testModifyWithNullSet() {
+        String str = ""abcdef"";
+        String[] set = null;
+        boolean expect = true;
+        assertThrows(NullPointerException.class, () -> {
+            charSetUtils.modify(str, set, expect);
+        }, ""Should throw NullPointerException for null set"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying with both string and set null"")
+    void testModifyWithBothNull() {
+        String str = null;
+        String[] set = null;
+        boolean expect = true;
+        assertThrows(NullPointerException.class, () -> {
+            charSetUtils.modify(str, set, expect);
+        }, ""Should throw NullPointerException for null string and null set"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying a single-character string"")
+    void testModifySingleCharacterString() {
+        String str = ""a"";
+        String[] set = {""a""};
+        boolean expect = true;
+        assertEquals(""a"", charSetUtils.modify(str, set, expect), ""Result should be 'a' for input 'a' with set 'a' and expect true"");
+
+        boolean expectFalse = false;
+        assertEquals("""", charSetUtils.modify(str, set, expectFalse), ""Result should be '' for input 'a' with set 'a' and expect false"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying with a set containing special characters"")
+    void testModifyWithSpecialCharactersSet() {
+        String str = ""a*b&c?d"";
+        String[] set = {""*&?""};
+        boolean expect = true;
+        assertEquals(""*&?"", charSetUtils.modify(str, set, expect), ""Result should be '*&?' for special characters match"");
+    }
+
+    @Test
+    @DisplayName(""Test modifying string with all characters in the set"")
+    void testModifyAllCharactersInSet() {
+        String str = ""abcdef"";
+        String[] set = {""abcdef""};
+        boolean expect = true;
+        assertEquals(""abcdef"", charSetUtils.modify(str, set, expect), ""Result should be 'abcdef' when all characters are expected"");
+    }
+}
+```"
+"org.apache.commons.lang3.CharSetUtils.keep(java.lang.String, java.lang.String[])","java.lang.String keep(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack2, $stack3, $stack4, $stack5;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+
+    if str != null goto label1;
+
+    return null;
+
+  label1:
+    $stack2 = virtualinvoke str.<java.lang.String: boolean isEmpty()>();
+
+    if $stack2 != 0 goto label2;
+    $stack3 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack3 == 0 goto label3;
+
+  label2:
+    $stack5 = """";
+
+    return $stack5;
+
+  label3:
+    $stack4 = staticinvoke <org.apache.commons.lang3.CharSetUtils: java.lang.String modify(java.lang.String,java.lang.String[],boolean)>(str, set, 1);
+
+    return $stack4;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CharSetUtilsTest {
+
+    private CharSetUtils charSetUtils;
+
+    @BeforeEach
+    void setUp() {
+        charSetUtils = new CharSetUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test keep method with non-empty string and valid set"")
+    void testKeepWithNonEmptyStringAndValidSet() {
+        String result = charSetUtils.keep(""hello world"", new String[]{""a"", ""e"", ""i"", ""o"", ""u""});
+        assertEquals(""eoo"", result, ""Keep vowels from 'hello world'"");
+    }
+
+    @Test
+    @DisplayName(""Test keep method with string containing characters from set"")
+    void testKeepWithStringContainingSetCharacters() {
+        String result = charSetUtils.keep(""abcde"", new String[]{""a"", ""e""});
+        assertEquals(""ae"", result, ""Keep only 'a' and 'e' from 'abcde'"");
+    }
+
+    // EDGE CASES (Empty and null inputs)
+
+    @Test
+    @DisplayName(""Test keep with null string"")
+    void testKeepWithNullString() {
+        assertNull(charSetUtils.keep(null, new String[]{""a"", ""e""}), ""Should return null for null input string"");
+    }
+
+    @Test
+    @DisplayName(""Test keep with empty string"")
+    void testKeepWithEmptyString() {
+        String result = charSetUtils.keep("""", new String[]{""a"", ""e""});
+        assertEquals("""", result, ""Keep on empty string should return empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test keep with null set"")
+    void testKeepWithNullSet() {
+        String result = charSetUtils.keep(""hello"", null);
+        assertEquals("""", result, ""Keep with null set should return empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test keep with empty set"")
+    void testKeepWithEmptySet() {
+        String result = charSetUtils.keep(""hello"", new String[]{});
+        assertEquals("""", result, ""Keep with empty set should return empty string"");
+    }
+
+    // CORNER CASES (Deep empty logic)
+
+    @Test
+    @DisplayName(""Test keep with non-empty string and set with deep empty logic"")
+    void testKeepWithDeepEmptySet() {
+        String result = charSetUtils.keep(""hello"", new String[]{null, """"});
+        assertEquals("""", result, ""Keep with deep empty set should return empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test keep with string containing only set characters"")
+    void testKeepStringOnlySetCharacters() {
+        String result = charSetUtils.keep(""aaa"", new String[]{""a""});
+        assertEquals(""aaa"", result, ""Keep all 'a' characters"");
+    }
+
+    // EDGE CASES (Special characters)
+
+    @Test
+    @DisplayName(""Test keep with special characters in string"")
+    void testKeepWithSpecialCharacters() {
+        String result = charSetUtils.keep(""h3ll0!@#world!"", new String[]{""!"", ""#"", ""0""});
+        assertEquals(""0#!!"", result, ""Keep special characters '!#0'"");
+    }
+
+    @Test
+    @DisplayName(""Test keep with set containing special characters"")
+    void testKeepWithSpecialCharactersSet() {
+        String result = charSetUtils.keep(""h3ll0!@#world!"", new String[]{""!"", ""#"", ""0""});
+        assertEquals(""0#!!"", result, ""Keep special characters '!#0'"");
+    }
+}
+```"
+org.apache.commons.lang3.CharSetUtils.deepEmpty(java.lang.String[]),boolean deepEmpty(java.lang.String[]),"{
+    java.lang.String[] strings;
+    unknown $stack5, $stack6, $stack7, $stack8, l1, l2, l3, s;
+
+
+    strings := @parameter0: java.lang.String[];
+
+    if strings == null goto label3;
+    l1 = strings;
+    l2 = lengthof l1;
+    l3 = 0;
+
+  label1:
+    $stack8 = l3;
+    $stack7 = l2;
+
+    if $stack8 >= $stack7 goto label3;
+    s = l1[l3];
+    $stack6 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isNotEmpty(java.lang.CharSequence)>(s);
+
+    if $stack6 == 0 goto label2;
+
+    return 0;
+
+  label2:
+    l3 = l3 + 1;
+
+    goto label1;
+
+  label3:
+    $stack5 = 1;
+
+    return $stack5;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
+/**
+ * Rigorous JUnit 5 tests for the CharSetUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharSetUtilsTest {
+
+    private CharSetUtils charSetUtils;
+
+    @BeforeEach
+    void setUp() {
+        charSetUtils = new CharSetUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test deepEmpty with all empty strings"")
+    void testDeepEmptyAllEmptyStrings() {
+        String[] strings = {"""", """", """"};
+        assertTrue(charSetUtils.deepEmpty(strings), ""All strings empty should return true"");
+    }
+
+    @Test
+    @DisplayName(""Test deepEmpty with some non-empty strings"")
+    void testDeepEmptyWithNonEmptyStrings() {
+        String[] strings = {"""", ""test"", """"};
+        assertFalse(charSetUtils.deepEmpty(strings), ""Presence of a non-empty string should return false"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test deepEmpty with a single empty string"")
+    void testDeepEmptySingleEmptyString() {
+        String[] strings = {""""};
+        assertTrue(charSetUtils.deepEmpty(strings), ""Single empty string should return true"");
+    }
+
+    @Test
+    @DisplayName(""Test deepEmpty with a single non-empty string"")
+    void testDeepEmptySingleNonEmptyString() {
+        String[] strings = {""test""};
+        assertFalse(charSetUtils.deepEmpty(strings), ""Single non-empty string should return false"");
+    }
+
+    @Test
+    @DisplayName(""Test deepEmpty with all non-empty strings"")
+    void testDeepEmptyAllNonEmptyStrings() {
+        String[] strings = {""a"", ""b"", ""c""};
+        assertFalse(charSetUtils.deepEmpty(strings), ""All non-empty strings should return false"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test deepEmpty with a mix of empty and whitespace-only strings"")
+    void testDeepEmptyWithWhitespaceStrings() {
+        String[] strings = {"""", "" "", ""   "", ""\t""};
+        assertFalse(charSetUtils.deepEmpty(strings), ""Whitespace-only strings should return false"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test deepEmpty with null input"")
+    void testDeepEmptyWithNullInput() {
+        String[] strings = null;
+        assertTrue(charSetUtils.deepEmpty(strings), ""Null input should return true"");
+    }
+
+    @Test
+    @DisplayName(""Test deepEmpty with an empty array"")
+    void testDeepEmptyWithEmptyArray() {
+        String[] strings = {};
+        assertTrue(charSetUtils.deepEmpty(strings), ""Empty array should return true"");
+    }
+}
+```"
+"org.apache.commons.lang3.CharSetUtils.squeeze(java.lang.String, java.lang.String[])","java.lang.String squeeze(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack9, buffer, ch, chars, chrs, i, lastChar, sz;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    $stack9 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack9 != 0 goto label1;
+    $stack10 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack10 == 0 goto label2;
+
+  label1:
+    $stack21 = str;
+
+    return $stack21;
+
+  label2:
+    chars = staticinvoke <org.apache.commons.lang3.CharSet: org.apache.commons.lang3.CharSet getInstance(java.lang.String[])>(set);
+    $stack11 = new java.lang.StringBuilder;
+    $stack12 = virtualinvoke str.<java.lang.String: int length()>();
+    specialinvoke $stack11.<java.lang.StringBuilder: void <init>(int)>($stack12);
+    buffer = $stack11;
+    chrs = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    sz = lengthof chrs;
+    lastChar = 32;
+    ch = 32;
+    i = 0;
+
+  label3:
+    $stack16 = i;
+    $stack15 = sz;
+
+    if $stack16 >= $stack15 goto label6;
+    ch = chrs[i];
+
+    if ch != lastChar goto label4;
+
+    if i == 0 goto label4;
+    $stack20 = virtualinvoke chars.<org.apache.commons.lang3.CharSet: boolean contains(char)>(ch);
+
+    if $stack20 == 0 goto label4;
+
+    goto label5;
+
+  label4:
+    $stack18 = buffer;
+    $stack17 = ch;
+    $stack14 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack17);
+    $stack19 = ch;
+    lastChar = $stack19;
+
+  label5:
+    i = i + 1;
+
+    goto label3;
+
+  label6:
+    $stack13 = virtualinvoke buffer.<java.lang.StringBuilder: java.lang.String toString()>();
+
+    return $stack13;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharSetUtils class focusing on the squeeze method.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharSetUtilsTest {
+
+    private CharSetUtils charSetUtils;
+
+    @BeforeEach
+    void setUp() {
+        charSetUtils = new CharSetUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test squeezing with a single charset"")
+    void testSqueezeSingleCharset() {
+        String result = charSetUtils.squeeze(""hello"", new String[]{""l""});
+        assertEquals(""helo"", result, ""Squeezing 'hello' with 'l' should result in 'helo'"");
+    }
+
+    @Test
+    @DisplayName(""Test squeezing with multiple charsets"")
+    void testSqueezeMultipleCharsets() {
+        String result = charSetUtils.squeeze(""mississippi"", new String[]{""s"", ""p""});
+        assertEquals(""misisipi"", result, ""Squeezing 'mississippi' should result in 'misisipi'"");
+    }
+
+    @Test
+    @DisplayName(""Test squeezing without affecting the input"")
+    void testSqueezeNoEffect() {
+        String result = charSetUtils.squeeze(""hello"", new String[]{""z""});
+        assertEquals(""hello"", result, ""Squeezing 'hello' with 'z' should have no effect"");
+    }
+
+    @Test
+    @DisplayName(""Test squeezing when matching first character"")
+    void testSqueezeFirstCharacter() {
+        String result = charSetUtils.squeeze(""aaabbb"", new String[]{""a"", ""b""});
+        assertEquals(""ab"", result, ""Squeezing 'aaabbb' results in 'ab'"");
+    }
+
+    @Test
+    @DisplayName(""Test squeezing where last character is in set"")
+    void testSqueezeLastCharacter() {
+        String result = charSetUtils.squeeze(""helloo"", new String[]{""o""});
+        assertEquals(""helo"", result, ""Squeezing 'helloo' should result in 'helo'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test squeezing an empty string"")
+    void testSqueezeEmptyString() {
+        String result = charSetUtils.squeeze("""", new String[]{""a""});
+        assertEquals("""", result, ""Squeezing an empty string should be empty"");
+    }
+
+    @Test
+    @DisplayName(""Test squeezing with empty charsets array"")
+    void testSqueezeEmptyCharsetArray() {
+        String result = charSetUtils.squeeze(""test"", new String[]{});
+        assertEquals(""test"", result, ""Squeezing with empty charsets array should not alter string"");
+    }
+
+    @Test
+    @DisplayName(""Test squeezing with null charsets array"")
+    void testSqueezeNullCharsetArray() {
+        String result = charSetUtils.squeeze(""test"", null);
+        assertEquals(""test"", result, ""Squeezing with null charsets array should not alter string"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test squeezing single-character string"")
+    void testSqueezeSingleCharacter() {
+        String result = charSetUtils.squeeze(""a"", new String[]{""a""});
+        assertEquals(""a"", result, ""Single-character squeeze should remain the same"");
+    }
+
+    @Test
+    @DisplayName(""Test squeezing with overlapping charsets"")
+    void testSqueezeOverlappingCharsets() {
+        String result = charSetUtils.squeeze(""abcdef"", new String[]{""abc"", ""bcd""});
+        assertEquals(""abcdef"", result, ""Squeezing 'abcdef' with overlapping charsets should not alter"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test squeezing a null string"")
+    void testSqueezeNullString() {
+        assertThrows(NullPointerException.class, () -> {
+            charSetUtils.squeeze(null, new String[]{""a""});
+        }, ""Squeezing null string should throw NullPointerException"");
+    }
+
+    @Test
+    @DisplayName(""Test squeezing with duplicate charset entries"")
+    void testSqueezeDuplicateCharsetEntries() {
+        String result = charSetUtils.squeeze(""woohoo"", new String[]{""o"", ""o""});
+        assertEquals(""woho"", result, ""Duplicate charset entries should still squeeze correctly"");
+    }
+
+}
+```"
+"org.apache.commons.lang3.CharSetUtils.containsAny(java.lang.String, java.lang.String[])","boolean containsAny(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack10, $stack11, $stack12, $stack7, $stack8, $stack9, c, chars, l3, l4, l5;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    $stack7 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack7 != 0 goto label1;
+    $stack8 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack8 == 0 goto label2;
+
+  label1:
+    $stack12 = 0;
+
+    return $stack12;
+
+  label2:
+    chars = staticinvoke <org.apache.commons.lang3.CharSet: org.apache.commons.lang3.CharSet getInstance(java.lang.String[])>(set);
+    l3 = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    l4 = lengthof l3;
+    l5 = 0;
+
+  label3:
+    $stack11 = l5;
+    $stack10 = l4;
+
+    if $stack11 >= $stack10 goto label5;
+    c = l3[l5];
+    $stack9 = virtualinvoke chars.<org.apache.commons.lang3.CharSet: boolean contains(char)>(c);
+
+    if $stack9 == 0 goto label4;
+
+    return 1;
+
+  label4:
+    l5 = l5 + 1;
+
+    goto label3;
+
+  label5:
+    return 0;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharSetUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharSetUtilsTest {
+
+    private CharSetUtils charSetUtils;
+
+    @BeforeEach
+    void setUp() {
+        charSetUtils = new CharSetUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test containsAny with a string containing characters from set"")
+    void testStringContainsCharactersFromSet() {
+        String str = ""hello"";
+        String[] set = {""a"", ""e"", ""i"", ""o"", ""u""};
+        assertTrue(charSetUtils.containsAny(str, set), ""String 'hello' should contain vowels"");
+    }
+
+    @Test
+    @DisplayName(""Test containsAny with a string not containing characters from set"")
+    void testStringNotContainsCharactersFromSet() {
+        String str = ""bcd"";
+        String[] set = {""a"", ""e"", ""i"", ""o"", ""u""};
+        assertFalse(charSetUtils.containsAny(str, set), ""String 'bcd' should not contain any vowels"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test containsAny with empty string"")
+    void testEmptyString() {
+        String str = """";
+        String[] set = {""a"", ""b"", ""c""};
+        assertFalse(charSetUtils.containsAny(str, set), ""Empty string should not contain any characters"");
+    }
+
+    @Test
+    @DisplayName(""Test containsAny with empty set"")
+    void testEmptySet() {
+        String str = ""abc"";
+        String[] set = {};
+        assertFalse(charSetUtils.containsAny(str, set), ""String should not contain characters from an empty set"");
+    }
+
+    @Test
+    @DisplayName(""Test containsAny with both empty string and set"")
+    void testBothEmpty() {
+        String str = """";
+        String[] set = {};
+        assertFalse(charSetUtils.containsAny(str, set), ""Empty string and empty set should return false"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test containsAny with null string"")
+    void testNullString() {
+        String str = null;
+        String[] set = {""a"", ""b"", ""c""};
+        assertFalse(charSetUtils.containsAny(str, set), ""Null string should return false"");
+    }
+
+    @Test
+    @DisplayName(""Test containsAny with null set"")
+    void testNullSet() {
+        String str = ""abc"";
+        String[] set = null;
+        assertFalse(charSetUtils.containsAny(str, set), ""Null set should return false"");
+    }
+
+    @Test
+    @DisplayName(""Test containsAny with null string and set"")
+    void testBothNull() {
+        String str = null;
+        String[] set = null;
+        assertFalse(charSetUtils.containsAny(str, set), ""Null string and null set should return false"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test containsAny with overlapping characters in set"")
+    void testOverlappingCharactersInSet() {
+        String str = ""abc"";
+        String[] set = {""ab"", ""bc""};
+        assertTrue(charSetUtils.containsAny(str, set), ""String 'abc' should match characters from overlapping set"");
+    }
+
+    @Test
+    @DisplayName(""Test containsAny with single character string in set"")
+    void testSingleCharacterStringInSet() {
+        String str = ""a"";
+        String[] set = {""a""};
+        assertTrue(charSetUtils.containsAny(str, set), ""Single character string 'a' should be found in set"");
+    }
+
+    @Test
+    @DisplayName(""Test containsAny with mixed case sensitivity"")
+    void testMixedCaseSensitivity() {
+        String str = ""AbC"";
+        String[] set = {""a"", ""b"", ""c""};
+        assertFalse(charSetUtils.containsAny(str, set), ""Case sensitivity should result in no matches"");
+    }
+}
+```"
+"org.apache.commons.lang3.CharSetUtils.count(java.lang.String, java.lang.String[])","int count(java.lang.String, java.lang.String[])","{
+    java.lang.String str;
+    java.lang.String[] set;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack8, $stack9, c, chars, count, l4, l5, l6;
+
+
+    str := @parameter0: java.lang.String;
+    set := @parameter1: java.lang.String[];
+    $stack8 = staticinvoke <org.apache.commons.lang3.StringUtils: boolean isEmpty(java.lang.CharSequence)>(str);
+
+    if $stack8 != 0 goto label1;
+    $stack9 = staticinvoke <org.apache.commons.lang3.CharSetUtils: boolean deepEmpty(java.lang.String[])>(set);
+
+    if $stack9 == 0 goto label2;
+
+  label1:
+    $stack13 = 0;
+
+    return $stack13;
+
+  label2:
+    chars = staticinvoke <org.apache.commons.lang3.CharSet: org.apache.commons.lang3.CharSet getInstance(java.lang.String[])>(set);
+    count = 0;
+    l4 = virtualinvoke str.<java.lang.String: char[] toCharArray()>();
+    l5 = lengthof l4;
+    l6 = 0;
+
+  label3:
+    $stack12 = l6;
+    $stack11 = l5;
+
+    if $stack12 >= $stack11 goto label5;
+    c = l4[l6];
+    $stack10 = virtualinvoke chars.<org.apache.commons.lang3.CharSet: boolean contains(char)>(c);
+
+    if $stack10 == 0 goto label4;
+    count = count + 1;
+
+  label4:
+    l6 = l6 + 1;
+
+    goto label3;
+
+  label5:
+    return count;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharSetUtils class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharSetUtilsTest {
+
+    private CharSetUtils charSetUtils;
+
+    @BeforeEach
+    void setUp() {
+        charSetUtils = new CharSetUtils();
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test count with non-empty string and matching set"")
+    void testCountMatchingSet() {
+        String str = ""hello world"";
+        String[] set = {""lo""};
+        assertEquals(5, charSetUtils.count(str, set), ""Count should be 5 for 'hello world' with set 'lo'"");
+    }
+
+    @Test
+    @DisplayName(""Test count with non-empty string and non-matching set"")
+    void testCountNonMatchingSet() {
+        String str = ""hello world"";
+        String[] set = {""xyz""};
+        assertEquals(0, charSetUtils.count(str, set), ""Count should be 0 for 'hello world' with set 'xyz'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test count with empty string"")
+    void testCountEmptyString() {
+        String str = """";
+        String[] set = {""a"", ""b""};
+        assertEquals(0, charSetUtils.count(str, set), ""Count should be 0 for an empty string"");
+    }
+
+    @Test
+    @DisplayName(""Test count with empty set"")
+    void testCountEmptySet() {
+        String str = ""test"";
+        String[] set = {};
+        assertEquals(0, charSetUtils.count(str, set), ""Count should be 0 for an empty set"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test count with string containing all matching characters"")
+    void testCountAllMatchingCharacters() {
+        String str = ""aaaa"";
+        String[] set = {""a""};
+        assertEquals(4, charSetUtils.count(str, set), ""Count should be 4 for 'aaaa' with set 'a'"");
+    }
+
+    @Test
+    @DisplayName(""Test count with single character string matching set"")
+    void testCountSingleCharacterString() {
+        String str = ""a"";
+        String[] set = {""a""};
+        assertEquals(1, charSetUtils.count(str, set), ""Count should be 1 for 'a' with set 'a'"");
+    }
+
+    @Test
+    @DisplayName(""Test count with single character string not matching set"")
+    void testCountSingleCharacterNoMatch() {
+        String str = ""a"";
+        String[] set = {""b""};
+        assertEquals(0, charSetUtils.count(str, set), ""Count should be 0 for 'a' with set 'b'"");
+    }
+
+    // SPECIAL CHARACTERS
+
+    @Test
+    @DisplayName(""Test count with string containing special characters"")
+    void testCountWithSpecialCharacters() {
+        String str = ""abc$%^123"";
+        String[] set = {""$%"", ""123""};
+        assertEquals(5, charSetUtils.count(str, set), ""Count should be 5 for 'abc$%^123' with set '$%', '123'"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test count with null string"")
+    void testCountNullString() {
+        String str = null;
+        String[] set = {""a"", ""b""};
+        assertEquals(0, charSetUtils.count(str, set), ""Count should be 0 for a null string"");
+    }
+
+    @Test
+    @DisplayName(""Test count with null set"")
+    void testCountNullSet() {
+        String str = ""test"";
+        String[] set = null;
+        assertEquals(0, charSetUtils.count(str, set), ""Count should be 0 for a null set"");
+    }
+
+    @Test
+    @DisplayName(""Test count with both null string and set"")
+    void testCountNullStringAndSet() {
+        String str = null;
+        String[] set = null;
+        assertEquals(0, charSetUtils.count(str, set), ""Count should be 0 when both string and set are null"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.access$300(org.apache.commons.lang3.CharRange),char access$300(org.apache.commons.lang3.CharRange),"{
+    org.apache.commons.lang3.CharRange x0;
+    unknown $stack1;
+
+
+    x0 := @parameter0: org.apache.commons.lang3.CharRange;
+    $stack1 = x0.<org.apache.commons.lang3.CharRange: char end>;
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange.access$300 method.
+ * Covers typical cases and null input handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // Assuming we have a constructor to initialize a CharRange object
+        // It might be range(CharRange start, CharRange end, boolean negated)
+        charRange = new CharRange('a', 'z', false); // example setup
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test access$300 with a typical CharRange instance"")
+    void testAccess300TypicalRange() {
+        assertEquals('z', CharRange.access$300(charRange), ""The end character should be 'z' in the range 'a' to 'z'"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test access$300 with null CharRange instance"")
+    void testAccess300NullCharRange() {
+        assertThrows(NullPointerException.class, () -> {
+            CharRange.access$300(null);
+        }, ""Should throw NullPointerException for null CharRange"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.getStart(),char getStart(),"{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = this.<org.apache.commons.lang3.CharRange: char start>;
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical cases, edge cases, and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    // Setting up some typical and edge case CharRange instances.
+    private static final char DEFAULT_START = 'a';
+    private static final char EDGE_CASE_START = Character.MIN_VALUE;
+
+    @BeforeEach
+    void setUp() {
+        charRange = new CharRange(DEFAULT_START);
+    }
+
+    // Typical Cases
+
+    @Test
+    @DisplayName(""Test getting start of CharRange with default start character"")
+    void testGetStartDefault() {
+        charRange = new CharRange(DEFAULT_START);
+        assertEquals(DEFAULT_START, charRange.getStart(), ""Start should be the default character initialized"");
+    }
+
+    @Test
+    @DisplayName(""Test getting start of CharRange with another typical character"")
+    void testGetStartWithDifferentChar() {
+        charRange = new CharRange('z');
+        assertEquals('z', charRange.getStart(), ""Start should be 'z' when initialized with 'z'"");
+    }
+
+    // Edge Cases
+
+    @Test
+    @DisplayName(""Test getting start of CharRange at edge character minimum value"")
+    void testGetStartAtCharMinValue() {
+        charRange = new CharRange(EDGE_CASE_START);
+        assertEquals(EDGE_CASE_START, charRange.getStart(), ""Start should be the minimum character value"");
+    }
+
+    @Test
+    @DisplayName(""Test getting start of CharRange with maximum character value"")
+    void testGetStartAtCharMaxValue() {
+        charRange = new CharRange(Character.MAX_VALUE);
+        assertEquals(Character.MAX_VALUE, charRange.getStart(), ""Start should be the maximum character value"");
+    }
+
+    @Test
+    @DisplayName(""Test getting start of CharRange with a non-printable character"")
+    void testGetStartWithNonPrintableChar() {
+        char nonPrintableChar = '\n';
+        charRange = new CharRange(nonPrintableChar);
+        assertEquals(nonPrintableChar, charRange.getStart(), ""Start should be a non-printable character like newline"");
+    }
+
+    @Test
+    @DisplayName(""Test getting start of CharRange with a special character"")
+    void testGetStartWithSpecialChar() {
+        char specialChar = '@';
+        charRange = new CharRange(specialChar);
+        assertEquals(specialChar, charRange.getStart(), ""Start should be '@' when initialized with '@'"");
+    }
+}
+```"
+"org.apache.commons.lang3.CharRange.isNotIn(char, char)","org.apache.commons.lang3.CharRange isNotIn(char, char)","{
+    char end, start;
+    unknown $stack2;
+
+
+    start := @parameter0: char;
+    end := @parameter1: char;
+    $stack2 = new org.apache.commons.lang3.CharRange;
+    specialinvoke $stack2.<org.apache.commons.lang3.CharRange: void <init>(char,char,boolean)>(start, end, 1);
+
+    return $stack2;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical cases, edge cases, and correctness of CharRange initialization.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // Initialize charRange if needed for any shared setup
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test typical range 'a' to 'z'"")
+    void testTypicalRange() {
+        charRange = CharRange.isNotIn('a', 'z');
+        assertEquals(new CharRange('a', 'z', true), charRange, ""CharRange should be 'a' to 'z' with negation"");
+    }
+
+    @Test
+    @DisplayName(""Test typical range 'A' to 'Z'"")
+    void testTypicalRangeUpperCase() {
+        charRange = CharRange.isNotIn('A', 'Z');
+        assertEquals(new CharRange('A', 'Z', true), charRange, ""CharRange should be 'A' to 'Z' with negation"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test range from a character to itself"")
+    void testRangeSingleCharacter() {
+        charRange = CharRange.isNotIn('m', 'm');
+        assertEquals(new CharRange('m', 'm', true), charRange, ""CharRange should be 'm' to 'm' with negation"");
+    }
+
+    @Test
+    @DisplayName(""Test empty range with start greater than end"")
+    void testEmptyRange() {
+        charRange = CharRange.isNotIn('z', 'a');
+        assertEquals(new CharRange('z', 'a', true), charRange, ""CharRange should be empty and negated when start > end"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test range with special characters"")
+    void testRangeWithSpecialCharacters() {
+        charRange = CharRange.isNotIn('!', '/');
+        assertEquals(new CharRange('!', '/', true), charRange, ""CharRange should be '!' to '/' with negation"");
+    }
+
+    @Test
+    @DisplayName(""Test range with digits"")
+    void testRangeWithDigits() {
+        charRange = CharRange.isNotIn('0', '9');
+        assertEquals(new CharRange('0', '9', true), charRange, ""CharRange should be '0' to '9' with negation"");
+    }
+
+    // VALIDATION OF BOOLEAN NEGATION
+
+    @Test
+    @DisplayName(""Test that isNotIn creates a negated range"")
+    void testNegationEffect() {
+        charRange = CharRange.isNotIn('1', '3');
+        assertTrue(charRange.contains('4'), ""Range should be negated and contain elements outside [1, 3]"");
+        assertFalse(charRange.contains('2'), ""Range should be negated and not contain elements within [1, 3]"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.isNegated(),boolean isNegated(),"{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class's isNegated method.
+ * Covers typical cases, edge cases, and confirms expected boolean behavior.
+ */
+class CharRangeTest {
+
+    private CharRange charRangeTrue;
+    private CharRange charRangeFalse;
+
+    @BeforeEach
+    void setUp() {
+        // Set up scenarios for negated as true and false.
+        charRangeTrue = new CharRange('a', 'z', true);
+        charRangeFalse = new CharRange('a', 'z', false);
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test isNegated when negated is true"")
+    void testIsNegatedTrue() {
+        assertTrue(charRangeTrue.isNegated(), ""isNegated should return true when negated is true"");
+    }
+
+    @Test
+    @DisplayName(""Test isNegated when negated is false"")
+    void testIsNegatedFalse() {
+        assertFalse(charRangeFalse.isNegated(), ""isNegated should return false when negated is false"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test isNegated with edge values when negated is true"")
+    void testIsNegatedTrueEdge() {
+        CharRange negatedRangeEdge = new CharRange(Character.MIN_VALUE, Character.MAX_VALUE, true);
+        assertTrue(negatedRangeEdge.isNegated(), ""isNegated should return true for full range when negated"");
+    }
+
+    @Test
+    @DisplayName(""Test isNegated with edge values when negated is false"")
+    void testIsNegatedFalseEdge() {
+        CharRange nonNegatedRangeEdge = new CharRange(Character.MIN_VALUE, Character.MAX_VALUE, false);
+        assertFalse(nonNegatedRangeEdge.isNegated(), ""isNegated should return false for full range when not negated"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.access$100(org.apache.commons.lang3.CharRange),boolean access$100(org.apache.commons.lang3.CharRange),"{
+    org.apache.commons.lang3.CharRange x0;
+    unknown $stack1;
+
+
+    x0 := @parameter0: org.apache.commons.lang3.CharRange;
+    $stack1 = x0.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange access$100 method.
+ * Covers typical cases and edge cases for the negated property.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // This setup is illustrative. Actual instantiation will depend on CharRange constructor.
+        // Here we demonstrate a typical setup example for a hypothetical constructor.
+        charRange = new CharRange('a', 'z'); // Example setup, adjust as per actual class definition.
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test access$100 when CharRange is not negated"")
+    void testAccess$100WhenNotNegated() {
+        // Assume method or constructor to set negated, e.g., charRange.setNegated(false);
+        // Example usage, must match actual API if available.
+        assertFalse(CharRange.access$100(charRange), ""Should return false when CharRange is not negated"");
+    }
+
+    @Test
+    @DisplayName(""Test access$100 when CharRange is negated"")
+    void testAccess$100WhenNegated() {
+        // Assume method or constructor to set negated, e.g., charRange.setNegated(true);
+        // Example usage, must match actual API if available.
+        // pseudo-method invocation for illustration, replace according to actual class API
+        CharRangeNegatedFieldAccessor.setNegated(charRange, true);
+        assertTrue(CharRange.access$100(charRange), ""Should return true when CharRange is negated"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test access$100 on default or inconsistent object state"")
+    void testAccess$100DefaultState() {
+        CharRange defaultCharRange = new CharRange('a'); // Adjust to reflect the default construction scenario
+        // pseudo-method invocation for illustration
+        CharRangeNegatedFieldAccessor.setNegated(defaultCharRange, false);
+        assertFalse(CharRange.access$100(defaultCharRange), ""Should not be negated by default"");
+
+        CharRange inconsistentCharRange = new CharRange('a', 'd'); // Example, no negation set
+        // pseudo-method invocation for illustration
+        CharRangeNegatedFieldAccessor.setNegated(inconsistentCharRange, true);
+        assertTrue(CharRange.access$100(inconsistentCharRange), ""Should handle inconsistent object state"");
+    }
+}
+
+// Hypothetical helper class to manage private field access, replace or adjust as needed.
+class CharRangeNegatedFieldAccessor {
+    static void setNegated(CharRange charRange, boolean negated) {
+        // This is a placeholder representing the logic to set the 'negated' field for tests
+        // Use reflection or any other means provided by the library or test framework
+    }
+}
+```
+"
+org.apache.commons.lang3.CharRange.access$200(org.apache.commons.lang3.CharRange),char access$200(org.apache.commons.lang3.CharRange),"{
+    org.apache.commons.lang3.CharRange x0;
+    unknown $stack1;
+
+
+    x0 := @parameter0: org.apache.commons.lang3.CharRange;
+    $stack1 = x0.<org.apache.commons.lang3.CharRange: char start>;
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange access$200 method.
+ * Covers typical cases and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        charRange = new CharRange('a', 'z');
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test access$200 returns the start char of a range"")
+    void testAccess$200TypicalRange() {
+        assertEquals('a', CharRange.access$200(charRange), ""Start char should be 'a' for range 'a' to 'z'"");
+    }
+
+    @Test
+    @DisplayName(""Test access$200 on a single character range"")
+    void testAccess$200SingleCharRange() {
+        CharRange singleCharRange = new CharRange('x');
+        assertEquals('x', CharRange.access$200(singleCharRange), ""Start char should be 'x' for range 'x' to 'x'"");
+    }
+
+    // ERROR CASES (Invalid Input)
+
+    @Test
+    @DisplayName(""Test access$200 with null CharRange"")
+    void testAccess$200NullInput() {
+        CharRange nullRange = null;
+        assertThrows(NullPointerException.class, () -> {
+            CharRange.access$200(nullRange);
+        }, ""Should throw NullPointerException for null CharRange"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.getEnd(),char getEnd(),"{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical usage, boundary testing, and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // Assuming a constructor like CharRange(char start, char end) exists for example purposes.
+        charRange = new CharRange('a', 'z');
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test getting end from a typical CharRange"")
+    void testGetEndTypicalRange() {
+        assertEquals('z', charRange.getEnd(), ""End should be 'z' for the range 'a' to 'z'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test getting end from a CharRange with a single character range"")
+    void testGetEndSingleCharacterRange() {
+        charRange = new CharRange('a', 'a');
+        assertEquals('a', charRange.getEnd(), ""End should be 'a' for the range 'a' to 'a'"");
+    }
+
+    @Test
+    @DisplayName(""Test getting end from a CharRange at the start of possible char values"")
+    void testGetEndRangeAtStart() {
+        charRange = new CharRange(Character.MIN_VALUE, 'b');
+        assertEquals('b', charRange.getEnd(), ""End should be 'b' for the range from Character.MIN_VALUE to 'b'"");
+    }
+
+    @Test
+    @DisplayName(""Test getting end from a CharRange at the end of possible char values"")
+    void testGetEndRangeAtEnd() {
+        charRange = new CharRange('y', Character.MAX_VALUE);
+        assertEquals(Character.MAX_VALUE, charRange.getEnd(), ""End should be Character.MAX_VALUE for the range 'y' to Character.MAX_VALUE"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test CharRange where the start and end are the same maximum char value"")
+    void testGetEndMaxCharSingleValue() {
+        charRange = new CharRange(Character.MAX_VALUE, Character.MAX_VALUE);
+        assertEquals(Character.MAX_VALUE, charRange.getEnd(), ""End should be Character.MAX_VALUE when range is Character.MAX_VALUE to Character.MAX_VALUE"");
+    }
+
+    @Test
+    @DisplayName(""Test CharRange where the start and end are special characters"")
+    void testGetEndSpecialCharacters() {
+        charRange = new CharRange('!', '~');
+        assertEquals('~', charRange.getEnd(), ""End should be '~' for the range '!' to '~'"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.hashCode(),int hashCode(),"{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1, $stack2, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack4 = 83 + $stack1;
+    $stack2 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack3 = 7 * $stack2;
+    $stack6 = $stack4 + $stack3;
+    $stack5 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack5 == 0 goto label1;
+    $stack8 = 1;
+
+    goto label2;
+
+  label1:
+    $stack8 = 0;
+
+  label2:
+    $stack7 = $stack6 + $stack8;
+
+    return $stack7;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class's hashCode method.
+ * Covers typical cases, edge cases, and logical branch conditions.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    // Helper function to set up CharRange
+    private CharRange createCharRange(char start, char end, boolean negated) {
+        return new CharRange(start, end, negated);
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test hashCode with typical character range"")
+    void testHashCodeTypicalRange() {
+        charRange = createCharRange('a', 'z', false);
+        assertEquals(83 + 'a' + 7 * 'z', charRange.hashCode(), ""Hash code for range 'a' to 'z' (non-negated)"");
+    }
+
+    @Test
+    @DisplayName(""Test hashCode with typical character range and negated"")
+    void testHashCodeNegatedRange() {
+        charRange = createCharRange('a', 'z', true);
+        assertEquals(83 + 'a' + 7 * 'z' + 1, charRange.hashCode(), ""Hash code for range 'a' to 'z' (negated)"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test hashCode with minimal character range"")
+    void testHashCodeMinimalRange() {
+        charRange = createCharRange('a', 'a', false);
+        assertEquals(83 + 'a' + 7 * 'a', charRange.hashCode(), ""Hash code for range 'a' to 'a' (non-negated)"");
+    }
+
+    @Test
+    @DisplayName(""Test hashCode with inverted character range"")
+    void testHashCodeInvertedRange() {
+        charRange = createCharRange('z', 'a', false);
+        assertEquals(83 + 'z' + 7 * 'a', charRange.hashCode(), ""Hash code for inverted range 'z' to 'a'"");
+    }
+
+    // SPECIAL VALUE CASES
+
+    @Test
+    @DisplayName(""Test hashCode with maximum char values"")
+    void testHashCodeMaxCharValues() {
+        charRange = createCharRange(Character.MAX_VALUE, Character.MAX_VALUE, false);
+        int expected = 83 + Character.MAX_VALUE + 7 * Character.MAX_VALUE;
+        assertEquals(expected, charRange.hashCode(), ""Hash code with max char values (non-negated)"");
+    }
+
+    @Test
+    @DisplayName(""Test hashCode with minimum char values"")
+    void testHashCodeMinCharValues() {
+        charRange = createCharRange(Character.MIN_VALUE, Character.MIN_VALUE, false);
+        int expected = 83 + Character.MIN_VALUE + 7 * Character.MIN_VALUE;
+        assertEquals(expected, charRange.hashCode(), ""Hash code with min char values (non-negated)"");
+    }
+
+    @Test
+    @DisplayName(""Test hashCode with range that spans from min to max char values"")
+    void testHashCodeMinToMaxRange() {
+        charRange = createCharRange(Character.MIN_VALUE, Character.MAX_VALUE, false);
+        int expected = 83 + Character.MIN_VALUE + 7 * Character.MAX_VALUE;
+        assertEquals(expected, charRange.hashCode(), ""Hash code spanning min to max char values (non-negated)"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.contains(char),boolean contains(char),"{
+    char ch;
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack2, $stack3, $stack4, $stack5, $stack6, $stack7;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    ch := @parameter0: char;
+    $stack2 = this.<org.apache.commons.lang3.CharRange: char start>;
+
+    if ch < $stack2 goto label1;
+    $stack5 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    if ch > $stack5 goto label1;
+    $stack7 = 1;
+
+    goto label2;
+
+  label1:
+    $stack7 = 0;
+
+  label2:
+    $stack6 = this;
+    $stack3 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack7 == $stack3 goto label3;
+    $stack4 = 1;
+
+    goto label4;
+
+  label3:
+    $stack4 = 0;
+
+  label4:
+    return $stack4;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class's contains method.
+ * Covers typical cases, edge cases, corner cases, and negated ranges.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // Here we assume some typical ranges for setup
+        // Depending on actual usage, you might initialize with different parameters
+        charRange = new CharRange('a', 'z'); // non-negated default range
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test contains within range"")
+    void testContainsWithinRange() {
+        assertTrue(charRange.contains('a'), ""Should contain boundary start character 'a'"");
+        assertTrue(charRange.contains('m'), ""Should contain middle character 'm'"");
+        assertTrue(charRange.contains('z'), ""Should contain boundary end character 'z'"");
+    }
+
+    @Test
+    @DisplayName(""Test contains outside range"")
+    void testContainsOutsideRange() {
+        assertFalse(charRange.contains('`'), ""Should not contain character '`' before start"");
+        assertFalse(charRange.contains('{'), ""Should not contain character '{' after end"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test contains with single character range"")
+    void testContainsSingleCharacterRange() {
+        CharRange singleCharRange = new CharRange('a', 'a');
+        assertTrue(singleCharRange.contains('a'), ""Single character range should contain 'a'"");
+        assertFalse(singleCharRange.contains('b'), ""Single character range should not contain 'b'"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test contains with full ASCII range"")
+    void testContainsFullAsciiRange() {
+        CharRange fullRange = new CharRange('\u0000', '\u007F');
+        assertTrue(fullRange.contains('A'), ""Full ASCII range should contain 'A'"");
+        assertTrue(fullRange.contains('\u007F'), ""Full ASCII range should contain '\u007F'"");
+        assertFalse(fullRange.contains('\u0080'), ""Full ASCII range should not contain '\u0080'"");
+    }
+
+    @Test
+    @DisplayName(""Test contains with negated range"")
+    void testContainsWithNegatedRange() {
+        CharRange negatedRange = new CharRange('a', 'z', true); // Assume negation is third parameter
+        assertFalse(negatedRange.contains('a'), ""Negated range should not contain 'a'"");
+        assertFalse(negatedRange.contains('z'), ""Negated range should not contain 'z'"");
+        assertTrue(negatedRange.contains('A'), ""Negated range should contain 'A'"");
+        assertTrue(negatedRange.contains('{'), ""Negated range should contain '{'"");
+    }
+
+    // SPECIAL INPUTS AND BOUNDARIES
+
+    @Test
+    @DisplayName(""Test contains with Integer.MIN_VALUE character"")
+    void testContainsWithMinChar() {
+        assertFalse(charRange.contains(Character.MIN_VALUE), ""Should not contain Character.MIN_VALUE"");
+    }
+
+    @Test
+    @DisplayName(""Test contains with Integer.MAX_VALUE character"")
+    void testContainsWithMaxChar() {
+        assertFalse(charRange.contains(Character.MAX_VALUE), ""Should not contain Character.MAX_VALUE"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.iterator(),java.util.Iterator iterator(),"{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack1;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack1 = new org.apache.commons.lang3.CharRange$CharacterIterator;
+    specialinvoke $stack1.<org.apache.commons.lang3.CharRange$CharacterIterator: void <init>(org.apache.commons.lang3.CharRange,org.apache.commons.lang3.CharRange$1)>(this, null);
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.Iterator;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class's iterator method.
+ * Covers typical cases, edge cases, and constructor behavior.
+ */
+class CharRangeIteratorTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // Assuming standard constructors are available
+        charRange = new CharRange('a', 'z'); // For example, create a range from 'a' to 'z'
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test iterator creation for a valid CharRange"")
+    void testIteratorCreation() {
+        Iterator<Character> iterator = charRange.iterator();
+        assertNotNull(iterator, ""Iterator should not be null"");
+    }
+
+    @Test
+    @DisplayName(""Test iterator sequential access for a CharRange"")
+    void testIteratorSequentialAccess() {
+        charRange = new CharRange('a', 'c');
+
+        Iterator<Character> iterator = charRange.iterator();
+        assertTrue(iterator.hasNext(), ""Iterator should have next element"");
+        assertEquals('a', iterator.next(), ""First element should be 'a'"");
+        assertTrue(iterator.hasNext(), ""Iterator should have next element"");
+        assertEquals('b', iterator.next(), ""Second element should be 'b'"");
+        assertTrue(iterator.hasNext(), ""Iterator should have next element"");
+        assertEquals('c', iterator.next(), ""Third element should be 'c'"");
+        assertFalse(iterator.hasNext(), ""Iterator should not have more elements"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test iterator on single-element CharRange"")
+    void testIteratorSingleElementRange() {
+        charRange = new CharRange('a', 'a');
+
+        Iterator<Character> iterator = charRange.iterator();
+        assertTrue(iterator.hasNext(), ""Iterator should have exactly one element"");
+        assertEquals('a', iterator.next(), ""Element should be 'a'"");
+        assertFalse(iterator.hasNext(), ""Iterator should not have more elements"");
+    }
+
+    @Test
+    @DisplayName(""Test iterator on reversed CharRange (empty range)"")
+    void testIteratorReversedCharRange() {
+        charRange = new CharRange('z', 'a');
+
+        Iterator<Character> iterator = charRange.iterator();
+        assertFalse(iterator.hasNext(), ""Iterator should not have any elements for a reversed range"");
+    }
+
+    // CONSTRUCTOR BEHAVIOR SPECIFIC CASES
+
+    @Test
+    @DisplayName(""Test starting iterator multiple times"")
+    void testIteratorMultipleStart() {
+        charRange = new CharRange('a', 'c');
+
+        Iterator<Character> iterator1 = charRange.iterator();
+        iterator1.next();
+
+        Iterator<Character> iterator2 = charRange.iterator();
+        assertTrue(iterator2.hasNext(), ""Each iterator should be independent"");
+        assertEquals('a', iterator2.next(), ""First element of the new iterator should be 'a'"");
+    }
+}
+```"
+"org.apache.commons.lang3.CharRange.isIn(char, char)","org.apache.commons.lang3.CharRange isIn(char, char)","{
+    char end, start;
+    unknown $stack2;
+
+
+    start := @parameter0: char;
+    end := @parameter1: char;
+    $stack2 = new org.apache.commons.lang3.CharRange;
+    specialinvoke $stack2.<org.apache.commons.lang3.CharRange: void <init>(char,char,boolean)>(start, end, 0);
+
+    return $stack2;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // No setup needed for this test suite.
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test creating a CharRange with distinct start and end characters"")
+    void testCreateCharRangeStartBeforeEnd() {
+        char start = 'a';
+        char end = 'z';
+        charRange = new CharRange(start, end, false);
+        assertNotNull(charRange, ""CharRange should be created with start and end characters"");
+    }
+
+    @Test
+    @DisplayName(""Test creating a CharRange with start equals end character"")
+    void testCreateCharRangeStartEqualsEnd() {
+        char start = 'm';
+        char end = 'm';
+        charRange = new CharRange(start, end, false);
+        assertNotNull(charRange, ""CharRange should be created even if start equals end"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test creating a CharRange with start character as min char value"")
+    void testCreateCharRangeMinCharValue() {
+        char start = Character.MIN_VALUE;
+        char end = 'a';
+        charRange = new CharRange(start, end, false);
+        assertNotNull(charRange, ""CharRange should handle start as Character.MIN_VALUE"");
+    }
+
+    @Test
+    @DisplayName(""Test creating a CharRange with end character as max char value"")
+    void testCreateCharRangeMaxCharValue() {
+        char start = 'a';
+        char end = Character.MAX_VALUE;
+        charRange = new CharRange(start, end, false);
+        assertNotNull(charRange, ""CharRange should handle end as Character.MAX_VALUE"");
+    }
+
+    // CORNER CASES
+
+    @Test
+    @DisplayName(""Test creating a CharRange with identical start and end at boundary values"")
+    void testCreateCharRangeBoundaryValues() {
+        char start = 'm';
+        char end = 'm';
+        charRange = new CharRange(start, end, false);
+        assertNotNull(charRange, ""CharRange should handle boundary condition with start equals end"");
+    }
+
+    @Test
+    @DisplayName(""Test creating a CharRange that includes special character"")
+    void testCreateCharRangeWithSpecialChar() {
+        char start = '!';
+        char end = '@';
+        charRange = new CharRange(start, end, false);
+        assertNotNull(charRange, ""CharRange should include special characters"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test creating a CharRange with invalid parameters"")
+    void testCreateCharRangeInvalid() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new CharRange('\uFFFF', '\u0000', false);
+        }, ""Should throw IllegalArgumentException for invalid range"");
+        assertEquals(""Character range end must be >= start"", exception.getMessage(), ""Error message should indicate invalid range"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.toString(),java.lang.String toString(),"{
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack2, $stack20, $stack21, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, buf;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    $stack2 = this.<org.apache.commons.lang3.CharRange: java.lang.String iToString>;
+
+    if $stack2 != null goto label3;
+    $stack4 = new java.lang.StringBuilder;
+    specialinvoke $stack4.<java.lang.StringBuilder: void <init>(int)>(4);
+    buf = $stack4;
+    $stack5 = virtualinvoke this.<org.apache.commons.lang3.CharRange: boolean isNegated()>();
+
+    if $stack5 == 0 goto label1;
+    $stack17 = virtualinvoke buf.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(94);
+
+  label1:
+    $stack19 = buf;
+    $stack18 = this;
+    $stack6 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack7 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack6);
+    $stack20 = this;
+    $stack9 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack21 = this;
+    $stack8 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack9 == $stack8 goto label2;
+    $stack12 = virtualinvoke buf.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(45);
+    $stack13 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack14 = virtualinvoke buf.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack13);
+
+  label2:
+    $stack16 = this;
+    $stack15 = buf;
+    $stack10 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+    this.<org.apache.commons.lang3.CharRange: java.lang.String iToString> = $stack10;
+
+  label3:
+    $stack11 = this;
+    $stack3 = this.<org.apache.commons.lang3.CharRange: java.lang.String iToString>;
+
+    return $stack3;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical cases, edge cases, and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // Initialize charRange before tests.
+        // Adjust setup as needed for constructor variations or negation setups.
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test toString on range from 'a' to 'z'"")
+    void testToStringTypicalRange() {
+        charRange = new CharRange('a', 'z');
+        assertEquals(""a-z"", charRange.toString(), ""Expected range string should be 'a-z'"");
+    }
+
+    @Test
+    @DisplayName(""Test toString on single character range 'm'"")
+    void testToStringSingleCharacter() {
+        charRange = new CharRange('m');
+        assertEquals(""m"", charRange.toString(), ""Expected range string should be 'm'"");
+    }
+
+    @Test
+    @DisplayName(""Test toString on negated range from 'a' to 'z'"")
+    void testToStringNegatedRange() {
+        charRange = new CharRange('a', 'z', true);
+        assertEquals(""^a-z"", charRange.toString(), ""Expected negated range string should be '^a-z'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test toString on single character range 'a'"")
+    void testToStringSingleCharacterEdge() {
+        charRange = new CharRange('a');
+        assertEquals(""a"", charRange.toString(), ""Expected range string should be 'a'"");
+    }
+
+    @Test
+    @DisplayName(""Test toString on range from '\\u0000' to '\\u007F'"")
+    void testToStringFullAsciiRange() {
+        charRange = new CharRange('\u0000', '\u007F');
+        assertEquals(""\u0000-\u007F"", charRange.toString(), ""Expected full ASCII range string should be '\\u0000-\\u007F'"");
+    }
+    
+    @Test
+    @DisplayName(""Test toString on negated single character 'b' range"")
+    void testToStringNegatedSingleCharacter() {
+        charRange = new CharRange('b', true);
+        assertEquals(""^b"", charRange.toString(), ""Expected negated single character string should be '^b'"");
+    }
+    
+    // ERROR CASES
+    // No specific error cases identified in the Jimple code for the toString method.
+
+}
+```"
+org.apache.commons.lang3.CharRange.is(char),org.apache.commons.lang3.CharRange is(char),"{
+    char ch;
+    unknown $stack1;
+
+
+    ch := @parameter0: char;
+    $stack1 = new org.apache.commons.lang3.CharRange;
+    specialinvoke $stack1.<org.apache.commons.lang3.CharRange: void <init>(char,char,boolean)>(ch, ch, 0);
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical cases, edge cases, and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // Setup if needed
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test creating CharRange with a typical character"")
+    void testCharRangeWithTypicalCharacter() {
+        char ch = 'a';
+        charRange = new CharRange(ch, ch, false);
+        assertTrue(charRange.is(ch), ""CharRange should contain 'a'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test creating CharRange with a non-printable character"")
+    void testCharRangeWithNonPrintableCharacter() {
+        char ch = '\n';
+        charRange = new CharRange(ch, ch, false);
+        assertTrue(charRange.is(ch), ""CharRange should contain the newline character '\\n'"");
+    }
+
+    @Test
+    @DisplayName(""Test creating CharRange with a boundary character (zero)"")
+    void testCharRangeWithZeroCharacter() {
+        char ch = '\0';
+        charRange = new CharRange(ch, ch, false);
+        assertTrue(charRange.is(ch), ""CharRange should contain the zero character '\\0'"");
+    }
+
+    @Test
+    @DisplayName(""Test creating CharRange with the max char value"")
+    void testCharRangeWithMaxCharacter() {
+        char ch = Character.MAX_VALUE;
+        charRange = new CharRange(ch, ch, false);
+        assertTrue(charRange.is(ch), ""CharRange should contain the maximum char value"");
+    }
+
+    @Test
+    @DisplayName(""Test creating CharRange with the first character in Unicode"")
+    void testCharRangeWithFirstCharacter() {
+        char ch = '\u0000';
+        charRange = new CharRange(ch, ch, false);
+        assertTrue(charRange.is(ch), ""CharRange should contain the first Unicode character"");
+    }
+
+    // ERROR CASES
+
+    @Test
+    @DisplayName(""Test creating CharRange with a character not in range"")
+    void testCharRangeWithCharacterNotInRange() {
+        char ch = 'a';
+        charRange = new CharRange('b', 'c', false);
+        assertFalse(charRange.is(ch), ""CharRange should not contain 'a' when range is 'b'-'c'"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.equals(java.lang.Object),boolean equals(java.lang.Object),"{
+    java.lang.Object obj;
+    org.apache.commons.lang3.CharRange this;
+    unknown $stack10, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, other;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    obj := @parameter0: java.lang.Object;
+
+    if obj != this goto label1;
+
+    return 1;
+
+  label1:
+    $stack3 = obj instanceof org.apache.commons.lang3.CharRange;
+
+    if $stack3 != 0 goto label2;
+
+    return 0;
+
+  label2:
+    other = (org.apache.commons.lang3.CharRange) obj;
+    $stack5 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack4 = other.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack5 != $stack4 goto label3;
+    $stack7 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack6 = other.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack7 != $stack6 goto label3;
+    $stack10 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+    $stack9 = other.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack10 != $stack9 goto label3;
+    $stack8 = 1;
+
+    goto label4;
+
+  label3:
+    $stack8 = 0;
+
+  label4:
+    return $stack8;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        charRange = new CharRange('a', 'z', false);
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test equals with the same CharRange instance"")
+    void testEqualsSameInstance() {
+        assertTrue(charRange.equals(charRange), ""CharRange should be equal to itself"");
+    }
+
+    @Test
+    @DisplayName(""Test equals with a different CharRange object with identical properties"")
+    void testEqualsIdenticalObject() {
+        CharRange identicalRange = new CharRange('a', 'z', false);
+        assertTrue(charRange.equals(identicalRange), ""CharRange should be equal to an identical CharRange instance"");
+    }
+
+    @Test
+    @DisplayName(""Test equals with a different CharRange object with different start"")
+    void testEqualsDifferentStart() {
+        CharRange differentStartRange = new CharRange('b', 'z', false);
+        assertFalse(charRange.equals(differentStartRange), ""CharRange should not be equal if start is different"");
+    }
+
+    @Test
+    @DisplayName(""Test equals with a different CharRange object with different end"")
+    void testEqualsDifferentEnd() {
+        CharRange differentEndRange = new CharRange('a', 'y', false);
+        assertFalse(charRange.equals(differentEndRange), ""CharRange should not be equal if end is different"");
+    }
+
+    @Test
+    @DisplayName(""Test equals with a different CharRange object with different negation status"")
+    void testEqualsDifferentNegation() {
+        CharRange differentNegationRange = new CharRange('a', 'z', true);
+        assertFalse(charRange.equals(differentNegationRange), ""CharRange should not be equal if negation status is different"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test equals with null"")
+    void testEqualsNull() {
+        assertFalse(charRange.equals(null), ""CharRange should not be equal to null"");
+    }
+
+    @Test
+    @DisplayName(""Test equals with a non-CharRange object"")
+    void testEqualsNonCharRangeObject() {
+        Object nonCharRange = new Object();
+        assertFalse(charRange.equals(nonCharRange), ""CharRange should not be equal to an object of different type"");
+    }
+
+    @Test
+    @DisplayName(""Test equals with maximum character range"")
+    void testEqualsMaxCharRange() {
+        CharRange maxRange = new CharRange(Character.MIN_VALUE, Character.MAX_VALUE, false);
+        CharRange identicalMaxRange = new CharRange(Character.MIN_VALUE, Character.MAX_VALUE, false);
+        assertTrue(maxRange.equals(identicalMaxRange), ""CharRange should be equal to an identical max CharRange"");
+    }
+
+    @Test
+    @DisplayName(""Test equals with single character range"")
+    void testEqualsSingleCharRange() {
+        CharRange singleCharRange = new CharRange('a', 'a', false);
+        assertTrue(singleCharRange.equals(new CharRange('a', 'a', false)), ""Single character range should be equal to identical range"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.isNot(char),org.apache.commons.lang3.CharRange isNot(char),"{
+    char ch;
+    unknown $stack1;
+
+
+    ch := @parameter0: char;
+    $stack1 = new org.apache.commons.lang3.CharRange;
+    specialinvoke $stack1.<org.apache.commons.lang3.CharRange: void <init>(char,char,boolean)>(ch, ch, 1);
+
+    return $stack1;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical cases, edge cases, and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange charRange;
+
+    @BeforeEach
+    void setUp() {
+        // Set-up can be used for shared state, if necessary
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test isNot with a typical character"")
+    void testIsNotTypicalCharacter() {
+        char ch = 'a';
+        charRange = CharRange.isNot(ch);
+        assertEquals(new CharRange(ch, ch, true), charRange, ""CharRange should represent exclusion of 'a'"");
+    }
+
+    @Test
+    @DisplayName(""Test isNot with a number character"")
+    void testIsNotNumberCharacter() {
+        char ch = '1';
+        charRange = CharRange.isNot(ch);
+        assertEquals(new CharRange(ch, ch, true), charRange, ""CharRange should represent exclusion of '1'"");
+    }
+
+    // EDGE CASES
+
+    @Test
+    @DisplayName(""Test isNot with a space character"")
+    void testIsNotSpaceCharacter() {
+        char ch = ' ';
+        charRange = CharRange.isNot(ch);
+        assertEquals(new CharRange(ch, ch, true), charRange, ""CharRange should represent exclusion of ' ' (space)"");
+    }
+
+    @Test
+    @DisplayName(""Test isNot with the first character of ASCII (0)"")
+    void testIsNotFirstAsciiCharacter() {
+        char ch = 0;
+        charRange = CharRange.isNot(ch);
+        assertEquals(new CharRange(ch, ch, true), charRange, ""CharRange should represent exclusion of ASCII 0"");
+    }
+
+    @Test
+    @DisplayName(""Test isNot with the last character of ASCII (DEL)"")
+    void testIsNotLastAsciiCharacter() {
+        char ch = 127;
+        charRange = CharRange.isNot(ch);
+        assertEquals(new CharRange(ch, ch, true), charRange, ""CharRange should represent exclusion of ASCII DEL"");
+    }
+
+    @Test
+    @DisplayName(""Test isNot with a non-ASCII character"")
+    void testIsNotNonAsciiCharacter() {
+        char ch = '\u263A'; // Unicode for a smiley face
+        charRange = CharRange.isNot(ch);
+        assertEquals(new CharRange(ch, ch, true), charRange, ""CharRange should represent exclusion of Unicode character"");
+    }
+}
+```"
+org.apache.commons.lang3.CharRange.contains(org.apache.commons.lang3.CharRange),boolean contains(org.apache.commons.lang3.CharRange),"{
+    org.apache.commons.lang3.CharRange range, this;
+    unknown $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack2, $stack20, $stack21, $stack22, $stack23, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+
+
+    this := @this: org.apache.commons.lang3.CharRange;
+    range := @parameter0: org.apache.commons.lang3.CharRange;
+
+    if range != null goto label01;
+    $stack23 = new java.lang.IllegalArgumentException;
+    specialinvoke $stack23.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>(""The Range must not be null"");
+
+    throw $stack23;
+
+  label01:
+    $stack2 = this.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack2 == 0 goto label08;
+    $stack12 = range.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack12 == 0 goto label04;
+    $stack19 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack18 = range.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack19 < $stack18 goto label02;
+    $stack21 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack20 = range.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack21 > $stack20 goto label02;
+    $stack22 = 1;
+
+    goto label03;
+
+  label02:
+    $stack22 = 0;
+
+  label03:
+    return $stack22;
+
+  label04:
+    $stack14 = range.<org.apache.commons.lang3.CharRange: char end>;
+    $stack13 = this.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack14 < $stack13 goto label05;
+    $stack16 = range.<org.apache.commons.lang3.CharRange: char start>;
+    $stack15 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack16 <= $stack15 goto label06;
+
+  label05:
+    $stack17 = 1;
+
+    goto label07;
+
+  label06:
+    $stack17 = 0;
+
+  label07:
+    return $stack17;
+
+  label08:
+    $stack3 = range.<org.apache.commons.lang3.CharRange: boolean negated>;
+
+    if $stack3 == 0 goto label11;
+    $stack9 = this.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack9 != 0 goto label09;
+    $stack10 = this.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack10 != 65535 goto label09;
+    $stack11 = 1;
+
+    goto label10;
+
+  label09:
+    $stack11 = 0;
+
+  label10:
+    return $stack11;
+
+  label11:
+    $stack5 = this.<org.apache.commons.lang3.CharRange: char start>;
+    $stack4 = range.<org.apache.commons.lang3.CharRange: char start>;
+
+    if $stack5 > $stack4 goto label12;
+    $stack7 = this.<org.apache.commons.lang3.CharRange: char end>;
+    $stack6 = range.<org.apache.commons.lang3.CharRange: char end>;
+
+    if $stack7 < $stack6 goto label12;
+    $stack8 = 1;
+
+    goto label13;
+
+  label12:
+    $stack8 = 0;
+
+  label13:
+    return $stack8;
+}
+","```java
+package org.apache.commons.lang3;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Rigorous JUnit 5 tests for the CharRange class.
+ * Covers typical cases, edge cases, corner cases, and error handling.
+ */
+class CharRangeTest {
+
+    private CharRange range;
+
+    @BeforeEach
+    void setUp() {
+        // Default setup, can modify for specific test methods
+    }
+
+    // TYPICAL CASES
+
+    @Test
+    @DisplayName(""Test range contains another range exactly"")
+    void testContainsExactRange() {
+        range = CharRange.is('a', 'z');
+        CharRange other = CharRange.is('a', 'z');
+        assertTrue(range.contains(other), ""Range should exactly contain itself"");
+    }
+
+    @Test
+    @DisplayName(""Test range contains a smaller range"")
+    void testContainsSmallerRange() {
+        range = CharRange.is('a', 'z');
+        CharRange other = CharRange.is('m', 'p');
+        assertTrue(range.contains(other), ""Range should contain a smaller range within its bounds"");
+    }
+
+    @Test
+    @DisplayName(""Test range does not contain an overlapping range"")
+    void testDoesNotContainOverlappingRange() {
+        range = CharRange.is('a', 'm');
+        CharRange other = CharRange.is('j', 'z');
+        assertFalse(range.contains(other), ""Range should not contain an overlapping range"");
+    }
+
+    @Test
+    @DisplayName(""Test range does not contain a range outside its bounds"")
+    void testDoesNotContainOutsideRange() {
+        range = CharRange.is('a', 'z');
+        CharRange other = CharRange.is('A', 'Z');
+        assertFalse(range.contains(other), ""Range should not contain a range outside its bounds"");
+    }
+
+    // EDGE CASES (Boundary Conditions)
+
+    @Test
+    @DisplayName(""Test range contains at start boundary"")
+    void testContainsAtStartBoundary() {
+        range = CharRange.is('a', 'z');
+        CharRange other = CharRange.is('a');
+        assertTrue(range.contains(other), ""Range should contain a single character equal to its start"");
+    }
+
+    @Test
+    @DisplayName(""Test range contains at end boundary"")
+    void testContainsAtEndBoundary() {
+        range = CharRange.is('a', 'z');
+        CharRange other = CharRange.is('z');
+        assertTrue(range.contains(other), ""Range should contain a single character equal to its end"");
+    }
+
+    @Test
+    @DisplayName(""Test range does not contain just outside boundary"")
+    void testDoesNotContainJustOutsideBoundary() {
+        range = CharRange.is('b', 'y');
+        CharRange otherInside = CharRange.is('a');
+        CharRange otherOutside = CharRange.is('z');
+        assertFalse(range.contains(otherInside), ""Range should not contain character just outside start boundary"");
+        assertFalse(range.contains(otherOutside), ""Range should not contain character just outside end boundary"");
+    }
+
+    // EDGE CASES (Negated Ranges)
+
+    @Test
+    @DisplayName(""Test negated range covers full space excluding inner range"")
+    void testNegatedCoversExclusion() {
+        range = CharRange.isNot('b', 'y');
+        CharRange other = CharRange.is('a', 'z');
+        assertFalse(range.contains(other), ""Negated range should not contain full range including excluded section"");
+    }
+
+    @Test
+    @DisplayName(""Test full range contains a negated range"")
+    void testFullContainsNegated() {
+        range = CharRange.is('a', 'z');
+        CharRange other = CharRange.isNot('b', 'y');
+        assertFalse(range.contains(other), ""Full range should not be completely covered by negated range"");
+    }
+
+    @Test
+    @DisplayName(""Test negated complete inclusion"")
+    void testNegatedCompleteInclusion() {
+        range = CharRange.isNot((char) 0, (char) 65535);
+        CharRange other = CharRange.isNot('b', 'y');
+        assertTrue(range.contains(other), ""Negated full range should contain another negated range"");
+    }
+
+    // ERROR CASE (Null Input)
+
+    @Test
+    @DisplayName(""Test null input for contains method"")
+    void testContainsNullInput() {
+        range = CharRange.is('a', 'z');
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            range.contains(null);
+        }, ""Should throw IllegalArgumentException for null input"");
+
+        assertEquals(""The Range must not be null"", exception.getMessage(), ""Exception message should match expected"");
+    }
+}
+```"
