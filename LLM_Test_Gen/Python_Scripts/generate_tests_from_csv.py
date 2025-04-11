@@ -113,7 +113,7 @@ if __name__ == "__main__":
 
     try:
         with open(output_csv_path, mode='w', newline='', encoding='utf-8') as outfile:
-            writer = csv.writer(outfile)
+            writer = csv.writer(outfile, quoting=csv.QUOTE_ALL)
             writer.writerow(OUTPUT_HEADER)
 
             for method_data in methods_to_process:
