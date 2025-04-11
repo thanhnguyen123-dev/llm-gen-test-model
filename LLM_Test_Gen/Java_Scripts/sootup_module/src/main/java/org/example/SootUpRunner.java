@@ -48,6 +48,8 @@ public class SootUpRunner {
 
         // Retrieve all classes discovered by SootUp
         Collection<SootClass<JavaSootClassSource>> allClasses = view.getClasses();
+
+        // Define the targeted classes
         Set<String> targetClassesNames = Set.of(
             "org.apache.commons.lang3.CharRange",
             "org.apache.commons.lang3.CharSetUtils",

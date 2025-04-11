@@ -10,13 +10,9 @@ sys.path.insert(0, str(service_parent_dir)) # Add Python_Scripts to the path
 
 from gpt_services import openai_service
 
-
-# --- Configuration ---
-# Define paths relative to THIS script file (generate_tests_from_csv.py)
 INPUT_CSV_RELATIVE_PATH = "../Data/Test_Data.csv"
 OUTPUT_CSV_RELATIVE_PATH = "../Data/Generated_Test_Data.csv"
 
-# Fully qualified prefixes of the classes to process
 TARGET_CLASS_PREFIXES = [
     "org.apache.commons.lang3.CharRange.",
     "org.apache.commons.lang3.CharSetUtils.",
@@ -28,15 +24,12 @@ INPUT_HEADER = ["FQN", "Signature", "Jimple Code Representation"]
 OUTPUT_HEADER = ["FQN", "Signature", "Jimple Code Representation", "Generated Code"]
 
 # Delay between API calls (in seconds) to avoid rate limits
-API_CALL_DELAY = 1 # Adjust as needed
+API_CALL_DELAY = 1
 
-# --- Main Logic ---
 if __name__ == "__main__":
-    print("--- Starting Test Generation from CSV (Using Absolute Paths) ---")
+    print("Start Generating Tests from CSV")
 
-    # Calculate absolute paths based on this script's location
     try:
-        # script_dir is already defined above for the import
         input_csv_path = (script_dir / INPUT_CSV_RELATIVE_PATH).resolve()
         output_csv_path = (script_dir / OUTPUT_CSV_RELATIVE_PATH).resolve()
         print(f"Script Directory: {script_dir}")
@@ -66,7 +59,6 @@ if __name__ == "__main__":
     methods_to_process = []
     header_indices = {}
 
-    # --- Read the input CSV using the absolute path ---
     try:
         print("Reading input CSV...")
         with open(input_csv_path, mode='r', newline='', encoding='utf-8') as infile:
@@ -123,13 +115,10 @@ if __name__ == "__main__":
 
                 print(f"\nProcessing method {processed_count + 1}/{len(methods_to_process)}: {fqn}")
 
-                # --- Call the OpenAI service ---
-                # Assumes openai_service.py handles its own template path correctly
                 generated_code = openai_service.generate_test_for_prompt_template(
                     fqn, signature, jimple
                 )
 
-                # --- Check for errors and Write ---
                 if generated_code.strip().startswith("// ERROR:"):
                     error_count += 1
                     print(f"  -> Service returned an error.")
@@ -139,7 +128,7 @@ if __name__ == "__main__":
                 writer.writerow([fqn, signature, jimple, generated_code])
                 processed_count += 1
 
-                # --- Add delay ---
+                # Add delay between API calls to avoid rate limits
                 if processed_count < len(methods_to_process):
                     print(f"  -> Waiting for {API_CALL_DELAY} second(s)...")
                     time.sleep(API_CALL_DELAY)
@@ -150,7 +139,7 @@ if __name__ == "__main__":
         traceback.print_exc()
         exit(1)
 
-    # --- Final Summary ---
+    # Summary
     print("\n--- Processing Complete ---")
     print(f"Total methods processed: {processed_count}")
     print(f"Methods resulting in errors from OpenAI service: {error_count}")
