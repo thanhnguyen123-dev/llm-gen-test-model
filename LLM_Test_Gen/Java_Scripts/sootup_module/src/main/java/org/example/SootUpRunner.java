@@ -73,7 +73,7 @@ public class SootUpRunner {
                 // Iterate over each method in the class
                 for (SootMethod method : sootClass.getMethods()) {
                     // Only proceed if the method is concrete
-                    if (!method.isConcrete() || method.getName().equals("<init>") || method.getName().equals("<clinit>")) {
+                    if (!method.isConcrete() || method.getName().equals("<init>") || method.getName().equals("<clinit>") || method.getName().startsWith("access$")) {
                         continue;
                     }
 
