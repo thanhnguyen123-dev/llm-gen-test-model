@@ -94,7 +94,6 @@ if __name__ == "__main__":
         print(f"FATAL ERROR: Failed to read input CSV file '{input_csv_path}': {e}")
         exit(1)
 
-    # --- Process methods and write output CSV using the absolute path ---
     if not methods_to_process:
         print("No methods found to process. Exiting.")
         exit(0)
@@ -116,7 +115,9 @@ if __name__ == "__main__":
                 print(f"\nProcessing method {processed_count + 1}/{len(methods_to_process)}: {fqn}")
 
                 generated_code = openai_service.generate_test_for_prompt_template(
-                    fqn, signature, jimple
+                    fqn,
+                    signature,
+                    jimple
                 )
 
                 if generated_code.strip().startswith("// ERROR:"):
