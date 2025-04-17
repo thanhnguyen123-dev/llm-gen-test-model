@@ -22,6 +22,7 @@ Your tasks are as follows:
 7. Structure the output as a standard Java class (e.g., `XxxTest.java`) with appropriate annotations (`@Test`, `@BeforeEach`, `@DisplayName`, etc.).
 8. Do NOT include any explanatory text, greetings, or summaries before or after the Java code block. Start directly with the `package` or `import` statements and end
 with the final closing brace `}` of the test class.
+9. Test methods in the same test class cannot have the same name, they need to have unique name
 
 Below are three examples demonstrating the required input format (FQN, Signature, Jimple) and the expected output format (complete JUnit 5 test code).
 Follow the output format precisely.
